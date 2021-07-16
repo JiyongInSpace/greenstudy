@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    *{
+        padding:0; margin:0; box-sizing: border-box;
+        color: white;
+    }
+    body{ 
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .menu{
+        display: flex;
+        list-style: none;
+    }   
+    .menu li{
+        flex-grow: 1;
+        padding: 1.5em;
+        text-align: center;
+        background: gray;
+        cursor: pointer;
+    }
+    article{
+        position: relative;
+        flex-grow: 1;
+        
+    }
+    article div{
+        position: absolute;
+        top: 0; bottom: 0; left:0; right:0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        opacity: 0;
+        transition: 0.5s;
+        cursor: default;
+    }
+    article h2{
+        font-size: 5em;
+    }
+    .menu li.active{
+        transition: 0.5s;
+    }
+    article div.active{
+        opacity: 1;
+    }
+    /* .menu li:hover{
+        filter: brightness(0.8);
+    } */
+
+    .menu li:nth-child(1).active{background: tomato;}
+    .menu li:nth-child(2).active{background: gold;}
+    .menu li:nth-child(3).active{background: limegreen;}
+    .menu li:nth-child(4).active{background: skyblue;}
+    article div:nth-child(1){background: tomato;}
+    article div:nth-child(2){background: gold;}
+    article div:nth-child(3){background: limegreen;}
+    article div:nth-child(4){background: skyblue;}
+
+
+    </style>
+
+    
+
+    <article>
+        <div class="active">
+            <h2>About</h2>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+        <div>
+            <h2>Products</h2>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+        <div>
+            <h2>Technology</h2>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+        <div>
+            <h2>Downloads</h2>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+    </article>
+    <footer>
+        <ul class="menu">
+            <li class="active">About</li>
+            <li>Products</li>
+            <li>Technology</li>
+            <li>Downloads</li>
+        </ul>
+    </footer>
+    <script>
+        const menus = document.querySelectorAll(".menu li");
+        const acticles = document.querySelectorAll("article div");
+        const colors = ["tomato", "gold", "limegreen", "skyblue"]
+        let num = 0;
+        menus.forEach((menuList, index) => {
+            menuList.addEventListener("click", function(){
+                menus[num].classList.remove("active");
+                acticles[num].classList.remove("active");
+                menus[index].classList.add("active");
+                acticles[index].classList.add("active");
+                menus[index].style.filter = "";
+                num = index;
+            })
+        })
+
+        menus.forEach((menuList, index) => {
+            menuList.addEventListener("mouseenter", function(){
+                if(!menus[index].classList.contains("active")){
+                    menus[index].style.filter = "brightness(0.8)";
+                }
+            })
+            menuList.addEventListener("mouseout", function(){
+                menus[index].style.filter = "";
+            })
+        })
+
+
+    </script>
+</body>
+</html>
