@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스터디 1주차 (0719)</title>
+</head>
+<body>
+
+
+
+<div class="ex1">
+    <div class="tab"> <!-- MEMO 탭 영역  -->
+        <a href="#" class="tab1 active">HOME</a>
+        <a href="#" class="tab2">ABOUT</a>
+        <a href="#" class="tab3">SHOP</a>
+        <a href="#" class="tab4">MY PAGE</a>
+    </div>
+    <div class="contents"> <!-- MEMO 콘텐츠 영역  -->
+        <div class="con1 active"><h1>contents 1</h1>프론트엔드 1주차 스터디 입니다.<br>2021.07.19.</div>
+        <div class="con2"><h1>contents 2</h1>프론트엔드 1주차 스터디 입니다.<br>2021.07.19.</div>
+        <div class="con3"><h1>contents 3</h1>프론트엔드 1주차 스터디 입니다.<br>2021.07.19.</div>
+        <div class="con4"><h1>contents 4</h1>프론트엔드 1주차 스터디 입니다.<br>2021.07.19.</div>
+    </div>
+</div>
+
+<style>
+    .ex1{
+        width:100%;
+        margin: 0 auto;
+    }
+    .ex1 .tab{
+        position: fixed;
+        left:0; top:0;
+        background-color: rgb(53, 53, 53);
+        width:100%;
+        height:80px;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .ex1 .tab a:hover{
+        background-color: rgb(226, 218, 211);
+    }
+    .ex1 .tab a{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color:#999;
+        width:25%;
+        font-weight: 900;
+        font-style: italic;
+        font-size:18px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .ex1 .tab a:visited{
+        color:#999;
+    }
+    .ex1 .tab .tab1.active{
+        background-color:slateblue;
+        color:white;
+    }
+    .ex1 .tab .tab2.active{
+        background-color: royalblue;
+        color:white;
+    }
+    .ex1 .tab .tab3.active{
+        background-color:teal;
+        color:white;
+    }
+    .ex1 .tab .tab4.active{
+        background-color: seagreen;
+        color:white;
+    }
+
+    .ex1 .contents{
+        position:fixed;
+        left:0; top:80px;
+        width:100%;
+        height: 100%;
+        color:white;
+        font-weight: 900;
+        font-style: italic;
+        font-size: 16px;
+    }
+    .ex1 .contents div{
+        position: absolute;
+        left:0; top:0;
+        width:100%;
+        height: 100%;
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .ex1 .contents div h1{
+        margin:0; padding:0;
+    }
+    .ex1 .contents .con1.active{
+        background-color: slateblue;
+        opacity: 1;
+    }
+    .ex1 .contents .con2.active{
+        background-color: royalblue;
+        opacity: 1;
+    }
+    .ex1 .contents .con3.active{
+        background-color:teal;
+        opacity: 1;
+    }
+    .ex1 .contents .con4.active{
+        background-color: seagreen;
+        opacity: 1;
+    }
+</style>
+
+<script>
+
+    const elTab = document.querySelectorAll('.tab > a');
+    const elCon = document.querySelectorAll('.contents div');
+    let num = 0;
+    
+    for(let i=0; i<elTab.length; i++){
+        elTab[i].addEventListener('click',function(){
+            elTab[num].classList.remove('active');
+            elCon[num].classList.remove('active');
+            elTab[i].classList.add('active');
+            elCon[i].classList.add('active');
+            num=i;
+        });
+    };
+    
+
+
+</script>
+
+
+
+
+</body>
+</html>
