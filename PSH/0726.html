@@ -40,6 +40,8 @@
             -webkit-background-clip: text;
             color: transparent;
             transition:1s;
+            width:100%;
+            text-align: center;
         }
         h1.active{
             background:linear-gradient(to right top, rgb(76, 0, 255), pink);
@@ -50,32 +52,33 @@
 
     <script>
         const txt = document.querySelector('h1');
+        const w = txt.offsetWidth;
         
         //TODO 마우스무브 이벤트 
         txt.addEventListener('mousemove',function(e){
             //MEMO clienX값이 h2의 offsetWidth의 절반값보다 클 경우 
-            if(e.clientX > this.offsetWidth/2){
+            if(e.clientX > w/2){
                 this.style = 'transform:rotateY(-45deg);';
             //MEMO clienX값이 h2의 offsetWidth의 절반값보다 작을 경우 
-            }else if(e.clientX < this.offsetWidth/2){
+            }else if(e.clientX < w/2){
                 this.style = 'transform:rotateY(45deg);';
             }
-            //MEMO 마우스를 떼면 회전값이 기본값 0으로 복귀 
-            this.addEventListener('mouseleave',function(){
-                this.style = 'transform:rotateY(0deg);';
-            });
         });
-
-
-        //TODO h2태그 hover효과 (그냥 스타일 주기 용, 과제내용과 무관)
+        
+        
+        //TODO h2태그 hover효과 
         txt.addEventListener('mouseenter',function(){
+            //MEMO 마우스 대면 액티브 클래스 부여 / 내용 변경 
             this.classList.add('active');
             this.innerText ='글자가 좌우로 움직여요! ';
-        });//MEMO 마우스 대면 액티브 클래스 부여 
+        });
         txt.addEventListener('mouseleave',function(){
+            //MEMO 마우스 떼면 액티브 클래스 삭제 / 내용 변경 
             this.classList.remove('active');
             this.innerText ='마우스를 올려 보세요 :) ';
-        });//MEMO 마우스 떼면 액티브 클래스 삭제 
+            //MEMO 마우스를 떼면 회전값이 기본값 0으로 복귀 
+            this.style = 'transform:rotateY(0deg);';
+        });
 
     </script>
 
