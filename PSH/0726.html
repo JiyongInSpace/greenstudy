@@ -9,7 +9,7 @@
 
     <article>
         <h3>2021.07.26. 스터디 2주차</h3>
-        <h1>마우스를 올려 보세요:) </h1>
+        <h1>마우스를 올려 보세요 :) </h1>
     </article>
 
     <style>
@@ -70,9 +70,11 @@
         //TODO h2태그 hover효과 (그냥 스타일 주기 용, 과제내용과 무관)
         txt.addEventListener('mouseenter',function(){
             this.classList.add('active');
+            this.innerText ='글자가 좌우로 움직여요! ';
         });//MEMO 마우스 대면 액티브 클래스 부여 
         txt.addEventListener('mouseleave',function(){
             this.classList.remove('active');
+            this.innerText ='마우스를 올려 보세요 :) ';
         });//MEMO 마우스 떼면 액티브 클래스 삭제 
 
     </script>
