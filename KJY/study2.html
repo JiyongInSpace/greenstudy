@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            margin: 0; padding: 0;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30em;
+            perspective: 100px;
+            overflow: hidden;
+        }
+        p{
+            cursor: default;
+        }
+    </style>
+
+    <p>안녕</p>
+
+    <script>
+        const p = document.querySelector("p");
+        
+        function rotateHello(e){
+            let degX = e.clientX / window.innerWidth - 0.5;
+            let degY = e.clientY / window.innerHeight - 0.5;
+            p.style.transform = `rotateX(${-4 * degY}deg) rotateY(${2 * degX}deg)`;
+        }
+        window.addEventListener("mousemove", rotateHello)
+
+        // function whereIAm(e){
+        //     console.log(e);
+        // }
+        // window.addEventListener("click", whereIAm)
+    </script>
+</body>
+</html>
