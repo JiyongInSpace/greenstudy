@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>mouseFollow</title>
+</head>
+<body>
+    
+    <div id="mouse">
+        <ul>
+            <li>clientX:<span class="clientx">0</span></li>
+            <li>clientY:<span class="clienty">0</span></li>
+        </ul>
+    </div>
+    
+    <style>
+        *{padding: 0; margin: 0; box-sizing: border-box;}
+        #mouse{position: absolute; cursor: pointer; background-color: cornsilk; padding: 10px; border-radius: 10px;}
+        ul{list-style: none;}
+    </style>    
+    
+    <script>
+        document.addEventListener('mousemove',function(e){
+            let x = e.clientX;
+            let y = e.clientY;
+            
+//            console.log(x,y);
+            
+            const clientX = document.querySelector('.clientx');
+            const clientY = document.querySelector('.clienty');
+            
+            mouse.style.left = x + 20 + "px";
+            mouse.style.top = y + 20 + "px";
+
+            clientX.textContent = x;
+            clientY.textContent = y;
+            
+        })
+    </script>
+</body>
+</html>
