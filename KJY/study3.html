@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        p{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+
+    <p>😀</p>
+
+    <script>
+        const p = document.querySelector("p");
+        function followMouse(e){
+            const x = e.clientX;
+            const y = e.clientY;
+            p.style.top = y+"px";
+            p.style.left = x+"px";
+        }
+        window.addEventListener("mousemove", followMouse)
+    </script>
+</body>
+</html>
