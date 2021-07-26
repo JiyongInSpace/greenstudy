@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+   <article>
+        <h1>HELLO</h1>
+        <ul>
+            <li>pageX:<span class="pagex">0</span></li>      
+            <li>mouseX:<span class="mousex">0</span></li>     
+       </ul>  
+   </article>
+
+    
+    <style>
+        *{padding: 0; margin: 0; box-sizing: border-box;}
+        article{width: 100%; height: 100vh; position: relative;}
+        h1{font-size: 100px; letter-spacing: 10px; position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%) perspective(600px) rotateX(0deg); transform-style: preserve-3d; will-change: transform; transition: 0.4s;}
+        ul{position: absolute; bottom: 0;}
+    </style>
+    
+    <script>
+        let x=0, mouseX=0;
+        
+        const text = document.querySelector('h1');
+        const page= document.querySelector('.pagex');
+        const mouse = document.querySelector('.mousex');
+        
+        text.addEventListener('mousemove',function(e){
+        
+        x = e.pageX;
+        mouseX = Math.max(-50, Math.min(50, window.innerWidth/2 - x));
+            
+        text.style.transform = "translate(-50%, -50%) perspective(600px) rotateY("+ mouseX +"deg) rotateX(0deg)";
+            
+        page.textContent = e.pageX;
+        mouse.textContent = mouseX;
+        })
+    </script>
+</body>
+</html>
