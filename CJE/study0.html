@@ -24,17 +24,24 @@
     </article>
 
     <style>
-        .tab-btn{width: 100%;}
+        *{margin: 0;}
+        .tab-btn{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .tab-btn a{
             background:gray;
             color:#fff;
-            display: inline-block;
-            padding:25px 0;
-            margin: 0 -3px;
-            font-size: 25px;
+            display: flex;
+            font-size: 40px;
             text-align: center;
             width: 25%;
             text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
 
 }
         .tab-btn a:hover:nth-child(1),
@@ -60,18 +67,19 @@
             position:absolute;
             left:0; top:0;
             display:none;
-            font-size: 55px;
+            font-size: 100px;
             align-items: center;
             line-height: 120px;
             color:#fff;     
             /* display: flex; */
             justify-content: center;
             align-items: center;
-            flex-direction: column}
+            flex-direction: column;}
     
 
         .tab-con div a{
         font-size: 25px;
+        display: flex;
         
         }   
 
