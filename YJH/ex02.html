@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!-- 마우스 따라다니기 -->
+
+
+<button> <a>윤지화 | 과제의 방</a> </button>
+<div class="come">따라와줘제발</div>
+
+<style>
+
+* {
+            margin: 0;
+        }
+    body {
+        width: 100%;
+        background-color: #018b4b;
+    }
+    
+    button{
+        color: white;
+        padding: 5px 15px;
+        background: black;
+        border: 1px solid black;
+        border-radius: 20px;
+
+    }
+    button a:hover{
+        font-size: 0.5rem;
+    }
+
+    .come {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(20%, 20%);
+        font-size: 2rem;
+        font-weight: 600;
+    }
+</style>
+
+<script>
+    const come = document.querySelector(".come");
+
+    document.addEventListener("mousemove", function(e) {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    come.style.left = mouseX + 'px';
+    come.style.top = mouseY + 'px';
+    });
+</script>
+
+<!--  스크립트 파일만 완성해주세요. 
+
+조건
+-먼저 img파일에는 파란색, 노랑색, 핑크색으로 된 셔츠 바지 치마가 각각 섞여있습니다. 
+이게 json 파일에 정리 돼있으니, 스크립트로 json 파일을 불러와 html에서 ul(클래스 이름 items) 안에 li태그로 넣어주세요. 제품리스트 페이지와 유사하다고 생각하시면 됩니다. 
+**html과 css는 되도록 건들지 마세요. 스크립트 연습하는 만큼 모든걸 스크립트로 해결해보세요:)
+
+
+-상단에 버튼이 총 7개 있습니다. 각 역활은 
+로고: 모든 상품이 다 출력
+셔츠: 셔츠들만 출력
+바지: 바지만 출력
+치마: 치마만 출력
+blue: 파란색 종류의 옷들만 출력
+yellow: 노란색 종류의 옷들만 출력
+pink: 분홍색 종류의 옷들만 출력  -->
+
+</body>
+
+</html>
