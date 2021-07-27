@@ -24,33 +24,40 @@
     </article>
 
     <style>
-        .tab-btn{width: 100%;}
+        *{margin: 0;}
+        .tab-btn{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .tab-btn a{
             background:gray;
             color:#fff;
-            display: inline-block;
-            padding:25px 0;
-            margin: 0 -3px;
-            font-size: 25px;
+            display: flex;
+            font-size: 40px;
             text-align: center;
             width: 25%;
             text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
 
 }
-        .tab-btn a:hover:nth-child(1){background: rgb(247, 169, 169);}
-        .tab-btn a:hover:nth-child(2){background: rgb(168, 236, 168);}
-        .tab-btn a:hover:nth-child(3){background: rgb(160, 218, 241);}
-        .tab-btn a:hover:nth-child(4){background: lemonchiffon;}
+        .tab-btn a:hover:nth-child(1),
+        .tab-btn a:hover:nth-child(2),
+        .tab-btn a:hover:nth-child(3),
+        .tab-btn a:hover:nth-child(4){background: lightslategrey;}
     
 
 
-        .tab-btn a:nth-child(1):active{background: rgb(247, 169, 169);}
-        .tab-btn a:nth-child(2):active{background: rgb(168, 236, 168);}
-        .tab-btn a:nth-child(3):active{background: rgb(160, 218, 241);}
-        .tab-btn a:nth-child(4):active{background: lemonchiffon;}
+        .tab-btn a:nth-child(1).active{background: rgb(247, 169, 169);}
+        .tab-btn a:nth-child(2).active{background: rgb(168, 236, 168);}
+        .tab-btn a:nth-child(3).active{background: rgb(160, 218, 241);}
+        .tab-btn a:nth-child(4).active{background: lemonchiffon;}
         
         .tab-con{
-            height:500px; 
+            height:100vh; 
             text-align: center;
             /* border:1px solid #000; */
             position:relative;
@@ -60,37 +67,24 @@
             position:absolute;
             left:0; top:0;
             display:none;
-            font-size: 55px;
+            font-size: 100px;
             align-items: center;
             line-height: 120px;
             color:#fff;     
             /* display: flex; */
             justify-content: center;
             align-items: center;
-            flex-direction: column}
-        
-            /* .tab-con > div{
-            width:100%; height:100%;
-             position:absolute; 
-            left:0; top:0;
-            display:none;
-            font-size: 55px;
-            align-items: center;
-            line-height: 120px;
-            color:#fff;     
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        } */
+            flex-direction: column;}
+    
 
         .tab-con div a{
         font-size: 25px;
+        display: flex;
         
         }   
 
         .tab-con div.active{
-            display:block;
+            display:flex;
         }
        
         .tab-con div:nth-child(1){background: rgb(240, 164, 164);}
