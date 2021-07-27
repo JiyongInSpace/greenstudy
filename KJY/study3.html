@@ -8,6 +8,19 @@
 </head>
 <body>
     <style>
+        *{
+            margin: 0;
+            color: 
+        }
+        body{
+            height: 100vh;
+            overflow: hidden;
+        }
+        button{
+            margin: 1em;
+            cursor: pointer;
+        }
+
         p{
             position: absolute;
             top: 50%;
@@ -16,16 +29,34 @@
     </style>
 
     <p>😀</p>
+    <button>🤩</button>
 
     <script>
+        // 마우스
         const p = document.querySelector("p");
+        
         function followMouse(e){
             const x = e.clientX;
             const y = e.clientY;
-            p.style.top = y+"px";
-            p.style.left = x+"px";
+            const xw = window.innerWidth;
+            const yh = window.innerHeight;
+            p.style.transform = `translate(${x - (xw/2) + 10}px, ${y - (yh/2) + 10}px)`
         }
         window.addEventListener("mousemove", followMouse)
+
+        // 랜덤배경
+        const jiyongFavorites = ["tomato", "crimson", "pink", "limegreen", "dodgerblue", "yellowgreen", "whitesmoke", "salmon", "indigo", "orange", "bisque", "beige"];
+        const colorBtn = document.querySelector("button");
+
+        function changeBackground(){
+            const randomDeg = Math.random() * 360;
+            const firstColor = jiyongFavorites[Math.floor(Math.random() * jiyongFavorites.length)];
+            const secondColor = jiyongFavorites[Math.floor(Math.random() * jiyongFavorites.length)];
+            
+            document.body.style.background = `linear-gradient(${randomDeg}deg, ${firstColor}, ${secondColor})`;
+        }
+        changeBackground();
+        colorBtn.addEventListener("click", changeBackground);
     </script>
 </body>
 </html>
