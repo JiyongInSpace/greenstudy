@@ -10,26 +10,69 @@
     <style>
         *{
             margin: 0;
-            color: 
+            list-style: none;
         }
         body{
             height: 100vh;
             overflow: hidden;
         }
+        
         button{
             margin: 1em;
             cursor: pointer;
-        }
+        } 
 
         p{
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 0.8em;
+            left: 0.8em;
+        }
+
+        div{
+            width: 100%;
+            position: absolute;
+            top:50%;
+        }
+        ul{
+            display: flex;
+            justify-content: space-around;
+            
+        }
+        ul li.remember::before, ul li.remember::after{
+            content: '😉';
+        }
+        form{
+            text-align: center;
+            margin: 100px;
+            /* border: 1px solid; */
+        }
+        form input{
+            background: none;
+            border: 0;
+            border-bottom: 1px solid;
+            padding: 0.5em;
+        }
+        form input:focus{
+            outline: none;
         }
     </style>
 
     <p>😀</p>
+
     <button>🤩</button>
+
+    <div>
+        <ul>
+            <li>김지용</li>
+            <li>박선후</li>
+            <li>윤지화</li>
+            <li>진가영</li>
+            <li>최주은</li>
+        </ul>
+        <form>
+            <input type="text" placeholder="당신의 이름을 알려주세요" required>
+        </form>
+    </div>
 
     <script>
         // 마우스
@@ -38,9 +81,7 @@
         function followMouse(e){
             const x = e.clientX;
             const y = e.clientY;
-            const xw = window.innerWidth;
-            const yh = window.innerHeight;
-            p.style.transform = `translate(${x - (xw/2) + 10}px, ${y - (yh/2) + 10}px)`
+            p.style.transform = `translate(${x}px, ${y}px)`
         }
         window.addEventListener("mousemove", followMouse)
 
@@ -57,6 +98,33 @@
         }
         changeBackground();
         colorBtn.addEventListener("click", changeBackground);
+
+
+        // 이름기억
+        const rememberForm = document.querySelector("form");
+        const rememberInput = document.querySelector("form input");
+        const studyNames = document.querySelectorAll("ul li");
+
+        function submitName(e){
+            e.preventDefault();
+            localStorage.setItem("username", rememberInput.value);
+            rememberInput.value = '';
+            rememberName();
+        }
+        rememberForm.addEventListener("submit", submitName)
+
+        function rememberName(){
+            const name = localStorage.username;
+            console.log(name);
+            studyNames.forEach((studyName) => {
+                if(studyName.innerText === name){
+                    studyName.classList.add("remember");
+                } else {
+                    studyName.classList.remove("remember");
+                }
+            })
+        }
+        rememberName();
     </script>
 </body>
 </html>
