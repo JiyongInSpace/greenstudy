@@ -12,7 +12,7 @@ function show(item, index){
 }
 
 function showItems(){
-    fetch("data/data.json")
+    fetch("https://raw.githubusercontent.com/JiyongInSpace/greenstudy/main/KJY/0802/data/data.json")
     .then(res => res.json())
     .then(data => callback(data, this.dataset.value, this.className));
     items.innerHTML = '';
