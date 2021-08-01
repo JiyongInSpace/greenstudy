@@ -1,4 +1,4 @@
-function init(){
+
 
     fetch('./data/data.json')
     .then( res => res.json() )
@@ -69,6 +69,3 @@ function init(){
         });
         
     };
-
-}
-window.onload = init;
