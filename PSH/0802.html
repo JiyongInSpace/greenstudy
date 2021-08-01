@@ -6,6 +6,18 @@
     <title>Document</title>
 </head>
 <body>
+    <ul>
+        <li>김지용</li>
+        <li>박선후</li>
+        <li>윤지화</li>
+        <li>진가영</li>
+        <li>최주은</li>
+    </ul>
+    <div class="hello">당신의 이름을 알려주세요 :)</div>
+    <form>
+        <input type="name" placeholder="My name is......" class="name">
+        <input type="submit" class="submit" value="GO">
+    </form>
     <span></span>
     
 </body>
@@ -13,33 +25,122 @@
 <style>
     *{
         margin:0; padding:0;
+        list-style: none;
+        cursor:pointer;
+    }
+    ul{
+        margin:0 auto;
+        width:60vw;
+        color:white;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    li{
+        font-size: 22px;
+        font-weight: 600;
+        color:#555;
+        width:23%;
+        text-align: center;
+        padding: 5px;
     }
     body{
-        /* position:relative; */
+        height:100vh;
+        position:relative;
+        background:
+            linear-gradient(217deg, rgba(255,0,0,.6), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.6), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.6), rgba(0,0,255,0) 70.71%);
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .hello{
+        margin-top:100px;
+        font-size: 16px;
+        letter-spacing: 8px;
+    }
+    .name{
+        width:200px;
+        padding:15px;
+        border:0px solid black;
+        border-radius: 30px;
+        background-color:white;
+        font-style: italic;
+        font-weight: 900;
+        color:black;
+        margin-top:20px;
+    }
+    .submit{
+        width:80px;
+        padding:15px;
+        border:0px solid black;
+        border-radius: 30px;
+        background-color:black;
+        margin-left:10px;
+        color:white;
+        font-weight: 900;
+        font-style: italic;
     }
     span{
         display:inline-block;
-        width:50px;
-        height:50px;
-        border-radius: 25px;
-        background:black;
-        opacity: 0.3;
-        /* position:absolute; */
-        transition:0.05s;
+        width:80px;
+        height:80px;
+        border-radius: 40px;
+        background:linear-gradient(to left bottom, #fdd000, blue);
+        mix-blend-mode: difference;
+        opacity: 0.5;
+        position:absolute;
+        transition:0.15s;
+        display:none;
+        z-index:999;
     }
 </style>
 
 <script>
     const cur = document.querySelector('span');
+    const txt1 = document.querySelector('h3');
+    const txt2 = document.querySelector('h2');
+    const input = document.querySelector('.name');
+    const submit = document.querySelector('.submit');
+    const elLi = document.querySelectorAll('li');
+    const elHi = document.querySelector('.hello')
+    const elBody = document.querySelector('body');
     
     window.addEventListener('mousemove',function(e){
-        const x = e.clientX;
-        const y = e.clientY;
-        // console.log(x,y);
-        cur.style = `
-        margin-left:${x}px;
-        margin-top:${y}px`;
+        const x = e.pageX;
+        const y = e.pageY;
+        cur.style =
+        `
+        left:${x}px;
+        top:${y}px;
+        display:inline-block;
+        transform:translate(10%,10%);
+        `;
+    });
+
+    submit.addEventListener('click',function(e){
+        localStorage.name = input.value;
+    });
+    for(let i=0; i<elLi.length; i++){
+        if(localStorage.name == elLi[i].innerText){
+            elLi[i].innerHTML = `🍰 ${localStorage.name} 🍰`;
+            elLi[i].style = 
+            'font-weight:900; color:white; background-color:rgba(0,0,0,0.5);border-radius:8px;';
+        }
+    };
+
+    function landom(){
+        const elCor = ['linear-gradient(to left bottom, pink, yellow)','linear-gradient(to left bottom, yellow, orange)','linear-gradient(to left bottom, skyblue, pink)','linear-gradient(217deg, rgba(255,0,0,.6), rgba(255,0,0,0) 70.71%),linear-gradient(127deg, rgba(0,255,0,.6), rgba(0,255,0,0) 70.71%),linear-gradient(336deg, rgba(0,0,255,.6), rgba(0,0,255,0) 70.71%)'];
+        const idx = Math.floor( (Math.random() * elCor.length) );
+        elBody.style = `background:${elCor[idx]};`;
+    }
+
+    window.addEventListener('load',function(){
+        landom();
     })
+    
 
 </script>
 </html>
