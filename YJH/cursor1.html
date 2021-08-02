@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button type="button" onclick="location.href='https://developer.mozilla.org/ko/docs/Web/CSS/cursor'">CURSOR</button>
+        <button type="button" onclick="location.href='cursor2.html'">Div CURSOR</button>
+    </div>
+
+    <style>
+        *{margin: 0; padding: 0;}
+        body{
+            cursor: url(img/ghost.cur) 15 15, auto;
+            height: 100vh;
+            background: cornsilk;
+            position: relative;
+        }
+        div{
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        button{
+            padding: 10px;
+            color:white;
+            background: black;
+            border-radius: 20px;
+            cursor: cell;
+        }
+    </style>
+</body>
+</html>
