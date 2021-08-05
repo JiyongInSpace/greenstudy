@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   <div class="text">
+        <span class="name"></span>
+        <span class="hi">안녕하세요.</span>
+    </div>
+    
+    <input type="text" placeholder="이름을 입력해주세요!" class="cookie">
+    <button class="btnCookie">check!</button>
+    
+    <style>
+        *{padding: 0; margin: 0; font-family: 'Noto Sans KR', sans-serif;}
+        body{margin:  0 auto; display: flex; height: 100vh; justify-content: center; align-items: center; flex-direction: column;}
+        
+        .text{width: 50%; text-align: center; font-weight: 700; color: #313131; font-size: 20px; margin-bottom: 2%;}
+        .text .name{color: darkolivegreen;}
+        .text .hi{}
+        .text ul{display: flex; list-style: none; justify-content: space-between; margin-top: 10%;}
+        .text ul li.active{color: red;}
+
+        
+        input{width: 25%; text-align: center; height: 5%; outline: none; margin-bottom: 20px;}
+        button{width: 10%; text-align: center; padding: 5px; text-transform: uppercase; background-color: darkolivegreen; color: #fff; outline: none; border: none; cursor: pointer;}
+    </style>
+    
+    <script>
+        const btn = document.querySelector('.btnCookie'),
+                input = document.querySelector('.cookie'),
+                name = document.querySelector('.name');
+        
+        function getCookie(name) {
+              var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+              return value? value[2] : null;
+        }
+        
+        function setCookie(name, value, day) {
+            var date = new Date();
+            date.setDate(date.getDate() + day);
+            document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+        };
+
+        
+        btn.addEventListener('click',function(){
+                const myname = input.value;
+//                console.log(myname);
+                setCookie('id',myname,'1');
+            
+                name.innerHTML = `${myname}님`;
+        });
+        
+        if(getCookie("id") != null){
+            name.innerHTML = `${getCookie("id")}님`;
+        }else{
+            name.innerHTML ='';
+        }
+    </script>
+    
+    <div class="text">
+        <ul>
+            <li>강아지</li>
+            <li>사냥꾼</li>
+            <li>송아지</li>
+            <li>고양이</li>
+            <li>참새</li>
+        </ul>
+    </div>
+    
+    <input type="text" placeholder="이름을 입력해주세요!" class="origin">
+    <button class="btnOrigin">check!</button>
+    
+    <script>
+        const origin = document.querySelector('.origin');
+        const btnOrigin = document.querySelector('.btnOrigin');
+        const li = document.querySelectorAll('ul li');
+        
+        function color(){
+            for(let i=0; i<li.length; i++){
+                    li[i].classList.remove('active');
+                if(li[i].innerHTML == localStorage.getItem('animal')){
+                    li[i].classList.add('active');
+                }
+            }
+        }
+        
+        color();
+        
+        btnOrigin.addEventListener('click',function(e){
+            e.preventDefault();
+//           console.log(origin.value); 
+            const inputAnimal = origin.value;
+            
+            localStorage.setItem('animal', inputAnimal);
+            
+            color();
+        });
+        
+        
+        
+//        console.log(li[1].innerHTML);
+    </script>
+</body>
+</html>

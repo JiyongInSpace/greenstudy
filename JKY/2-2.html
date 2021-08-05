@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>colorRandom</title>
+</head>
+<body>
+    
+    <style>
+        *{margin: 0; padding: 0; box-sizing: border-box;}
+    </style>
+    
+    <script>
+        let colorArr = ["#7DABD0","#FBC1AD","#F56E4A","#FFDF6F","#E5E1E0"];
+        const body = document.querySelector("body");
+        
+        function ran(min, max){
+            return Math.floor((Math.random() * (max-min+1)) + min);
+        }
+        
+        let num = ran(0,4);
+        
+        console.log(num);
+    
+        body.style.backgroundColor = colorArr[num];
+        
+    
+    </script>
+</body>
+</html>
