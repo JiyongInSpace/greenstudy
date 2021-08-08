@@ -35,7 +35,8 @@
 
         function remember(e){
             e.preventDefault();
-            document.cookie = `username=${input.value}`
+            document.cookie = `username=${input.value};path=/`;
+
             input.value = '';
             hello(); //입력시 인사
         }
@@ -43,7 +44,7 @@
         if(document.cookie.match('username')) hello(); //접속시 인사
 
         form.addEventListener("submit", remember);
-
-    </script>
+        // liveServer에선 되는데 로컬에선 왜 안될까요
+    </script>  
 </body>
 </html>
