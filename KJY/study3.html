@@ -157,7 +157,7 @@
             dateDiff = studyDay.getTime() - today.getTime(); // dateDiff 다시 세팅
             
             let studyDays = Math.floor(dateDiff/1000/60/60/24);
-            let studyHours = studyDay.getHours() - today.getHours();
+            let studyHours = studyDay.getHours() - today.getHours() - 1;
             if(studyHours < 0) studyHours += 24;
             let studyMins = 60 - today.getMinutes();
             let studyScns = 60 - today.getSeconds();
