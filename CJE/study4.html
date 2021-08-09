@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        
+    <body onload="checkCookie()">
+    <button onclick="delCookie('username')">지우기</button>
+    <script>
+    function setCookie(cname, cvalue, exdays)
+    {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+    }
+    function getCookie(cname)
+    {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i=0; i<ca.length; i++)
+        {
+            var c = ca[i];
+            while(c.charAt(0) == ' ')
+            {
+                c = c.substring(1);
+            }
+            if(c.indexOf(name) == 0)
+            {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    function checkCookie()
+    {
+        var username = getCookie("username");
+        if (username != "")
+        {
+            alert(username + "님 환영합니다.");
+        }
+        else
+        {
+            username = prompt("이름을 입력하세요 :", "");
+            if (username != "" && username != null)
+            {
+                setCookie("username", username, 365);
+            }
+        }
+    }
+    function delCookie(cname)
+    {
+        document.cookie = cname + "=; path=/";
+    }
+    </script>
+    
+    
+    </script>
+    
+    <body>
+        <div class="dday">
+        <h1>다음 스터디까지</h1>
+        오늘(<span id="date1"></span>) 부터 <span id="date2"></span>까지
+        <h2>D- <span id="result"></span></h2>
+        </div>
+    </body>
+    
+    <style>
+        *{margin: 0;}
+    /* body{background:black;} */
+    .dday {
+        text-align: center;
+        padding: 40vh;
+        /* color: white; */
+        font-weight:bolder;
+        }
+    </style>
+    
+    <script>
+        let date1 = new Date();
+        let date2 = new Date(2021, 07, 16);
+    
+        let date1Text = date1.getFullYear() + '-' + (date1.getMonth() + +1) + '-' + date1.getDate();
+        let date2Text = date2.getFullYear() + '-' + (date2.getMonth() + +1) + '-' + date2.getDate();
+        document.querySelector('#date1').innerHTML = date1Text;
+        document.querySelector('#date2').innerHTML = date2Text;
+    
+        let du = date2.getTime() - date1.getTime();
+        
+        let dayTime = 1000 * 60 * 60 * 24;
+    
+        let result = Math.ceil(du /dayTime);
+        document.querySelector('#result').innerHTML = result;
+    
+    </script>
+
+
+    <Script>
+        
+        function RandomNumber() {
+        var today = new Date();
+        var num= Math.abs(Math.sin(today.getTime()/1000));
+        return num;
+        }
+
+        
+        function RandomText() {
+        var x = RandomNumber();
+        
+        if (x > .80)
+        {document.write ("김지용"); return; }
+        if (x > .60)
+        {document.write ("박선후"); return; }
+        if (x > .40)
+        {document.write ("윤지화"); return; }
+        if (x > .20)
+        {document.write ("지가영"); return; }
+        if (x > .0)
+        {document.write ("최주은"); return; }
+        }
+        
+        RandomText();
+       
+        </script>
+
+    
+</body>
+</html>
