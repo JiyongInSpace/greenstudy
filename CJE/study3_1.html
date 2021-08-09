@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>click</button>
+
+    <style>
+        button{
+            padding: 10px 30px;
+            font-size: 15px;
+            font-weight: bold;
+            background: papayawhip;
+            border: 2px solid lightslategray;
+    }
+    </style>
+    
+
+    <script>
+    
+    const button = document.querySelector('button');
+
+        button.onclick = function() {
+        let name = prompt('이름을 입력해주세요');
+        alert('안녕하세요 ' + name + ' 님');
+}
+
+        if (name === '김지용') {
+        alert('안녕하세요 김지용님');
+        } else if (name === '박선후') {
+        alert('안녕하세요 박선후님');
+        } else if (name === '윤지화') {
+        alert('안녕하세요 윤지화님');
+        } else if (name === '지가영') {
+        alert('안녕하세요 지가영님');
+        } else if (name === '최주은') {
+        alert('안녕하세요 최주은님');
+        }
+
+    </script>
+
+
+</body>
+</html>
