@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <style>
+        *{margin: 0; padding: 0;}
+        body{
+            height: 100vh;
+            background: cornsilk;
+            cursor: default;
+        }
+
+        .cursor{
+            width: 20px; height: 20px;
+            border: 1px solid black;
+            border-radius: 50%;
+            position: absolute;
+
+            transition-duration: 200ms;
+            transition-timing-function: ease-out;
+            animation: cursorAni .5s infinite alternate;
+        }
+
+        .cursor::after{
+            content: '';
+            width: 20px; height: 20px;
+            border: 8px solid rgb(131, 131, 131);
+            border-radius: 50%;
+            position: absolute;
+            opacity: .5;
+            top: -8px; left: -8px;
+            
+            animation: cursorAni2 .5s infinite alternate;
+        }
+
+        @keyframes cursorAni {
+            from {transform: scale(1);}
+            to {transform: scale(.7);}
+        }
+        @keyframes cursorAni2 {
+            from {transform: scale(1);}
+            to {transform: scale(.4);}
+        }
+        @keyframes cursorAni3 {
+            0% {transform: scale(1);}
+            50% {transform: scale(5);}
+            100% {transform: scale(1);
+                opacity: 0;}
+        }
+        .expand{
+            animation: cursorAni3 5s forwards;
+            border: rgba(0, 26, 255, 0.5) solid 1px;
+        }
+
+    </style>
+</body>
+    <script>
+
+        const cursor = document.querySelector(".cursor");
+    // 방법1
+    //     document.addEventListener('mousemove', function(e) {
+    //             console.log(e.clientX, e.clientY)
+    //         const mouseX = e.clientX;
+    //         const mouseY = e.clientY;
+    //         cursor.style.left = mouseX- 10 + 'px';
+    //         cursor.style.top = mouseY- 10 + 'px';     
+    // });
+
+    // 방법2
+        document.addEventListener('mousemove', e => {
+            cursor.setAttribute("style", "top:" +(e.pageY-10)+"px; left:"+(e.pageX-10)+"px;")
+        })
+
+    // 클릭이펙트
+        document.addEventListener('click', ()=>{
+            cursor.classList.add("expand");
+            setTimeout(()=>{
+                cursor.classList.remove("expand");
+            },500)
+        })
+    </script>
+</html>

@@ -153,7 +153,7 @@
             text-align: center;
             padding-bottom: 50px;
             border-bottom: 1px dashed black;}
-        </style>
+    </style>
 
 
     <script>
@@ -177,38 +177,6 @@
             colorChange.style.background=randomColor();
         })
 
-
-    </script>
-
-
-    <script>
-                const rememberForm = document.querySelector("form");
-        const rememberInput = document.querySelector("form input");
-        const studyNames = document.querySelectorAll("ul li");
-
-        var animalForm = document.querySelector('form');
-        var getAnimal = document.querySelector('form input');
-        var showAnimal = document.querySelector('.showAnimal');
-
-        function setAnimalName(e){
-            e.preventDefault();
-            localStorage.setItem("animal", getAnimal.value);
-            getAnimal.value = '';
-        }
-        // animalForm.addEventListener("submit", submitName)
-
-        // function getAnimalName(){
-        //     const name = localStorage.username;
-        //     console.log(name);
-        //     studyNames.forEach((Animalame) => {
-        //         if(studyName.innerText === name){
-        //             studyName.classList.add("remember");
-        //         } else {
-        //             studyName.classList.remove("remember");
-        //         }
-        //     })
-        // }
-        // rememberName();
 
     </script>
 
@@ -249,6 +217,7 @@
 
     </script>
 
+
     <h2>Random Trun</h2>
     <div class="sect random_turn">
         <button class="turn" style="border: none;">　who's turn　</button>
@@ -260,7 +229,8 @@
             margin-bottom: 50px;
         }
         .who{
-            width: 500px; height: 50px;
+            width: 500px; height: 20px; 
+            padding: 20px;
             margin: 0 auto;
             border: olive 1px dashed;}
     </style>
@@ -268,30 +238,61 @@
         var who = document.querySelector('.who')
         var turn = document.querySelector('.turn')
         var ourName = ['윤지화','김지용','진가영','박선후','최주은']
+        
+        function shuffle(array){
+            array.sort(() => Math.random()-0.5);
+        }
 
-        let getRandomName = () => {
-            var randomName = '';
-            for (let i = 0; i < ourName.length; i++){
-                let ourNameInt = Math.floor(ourName.length * Math.random());
-                randomName += ourName[ourNameInt];
-                return randomName
+        turn.addEventListener('click', function(){
+            shuffle(ourName);
+            who.textContent = ourName
+        })
+    </script>
+
+    <div class="ex5">
+        <h2>안녕하세요?</h2>
+        <h3 class="user">님, 좋은하루 되세요!</h3>
+        <input type="text" name="id" id="id" class="centerInput"
+        placeholder="이름을 적어주세요." onkeyup="enterName();">
+    </div>
+    <style>
+
+        p, input{display:inline-block}
+        h3{padding: 10px; display: none; text-align: center;}
+        
+        input[type=text]{
+            display: block; margin:auto;
+            border: none; background: none; 
+            border-bottom: 1px solid black;
+        }
+        input[type=text]::placeholder { 
+            color: rgb(103, 223, 123);  opacity: .7;
+            text-align: center; font-weight: 600;  
+        }
+        .ex5{padding: 50px 0 100px ;        }
+
+    </style>  
+    <script>
+    
+        const loginName = document.querySelector('input')
+        const user = document.querySelector('.user')
+    
+        greet();
+    
+        function enterName (){
+            if(window.event.keyCode ==13){
+                localStorage.name = loginName.value;
+                greet();
             }
         }
-        console.log(getRandomName);
-        turn.addEventListener('click', ()=>{
-            console.log(randomName.innerHTML)
-        })
-
+        function greet (){
+            if(localStorage.name != undefined){
+                loginName.style.display = 'none';
+                user.textContent = localStorage.name + '님, 좋은하루 되세요!';
+                user.style.display = 'block';
+            }
+        }
+        
     </script>
-    
-    <h2>Local Storage</h2>
-    <div class="sect">
-        <!-- <h3>좋아하는 동물이 뭔가요?</h3>
-        <p>(렛서판다, 고양이, 리트리버, 병아리, 사막여우, 쿼카)</p> -->
-        <form>
-            <input type="text" placeholder="좋아하는 동물은?" required>
-        </form>
-        <div class="showAnimal"></div>
-    </div>
 </body>
 </html>

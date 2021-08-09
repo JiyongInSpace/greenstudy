@@ -23,7 +23,7 @@ function showItems(){
             })
         } else {
             data.items.forEach((item, index) => {
-                if(item.type === value && item.color === value) show(item, index);
+                if(item.type === value || item.color === value) show(item, index);
             })
         }
     }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+
+    <form>
+        <input type="text" placeholder="이름을 알려주세요">
+        <p></p>
+    </form>
+
+    <script>
+        const form = document.querySelector("form")
+        const input = document.querySelector("input");
+        const p = document.querySelector("p");
+
+        function hello(){ 
+            p.innerHTML = `${document.cookie.substring(9)}님, 안녕하세요?` // 쿠키값이 "username=abcd" 이기때문에 9번째 글자 이후값 빼옴
+            input.style.display = "none";
+        }
+
+        function remember(e){
+            e.preventDefault();
+            document.cookie = `username=${input.value};path=/`;
+
+            input.value = '';
+            hello(); //입력시 인사
+        }
+
+        if(document.cookie.match('username')) hello(); //접속시 인사
+
+        form.addEventListener("submit", remember);
+        // liveServer에선 되는데 로컬에선 왜 안될까요
+    </script>  
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0809+다섯숙제</title>
+</head>
+<body>
+
+    <div class="ex-1">
+        <p>Hi, stranger!<br>What's your name?</p>
+        <form>
+            <input type="name" id="namebtn" placeholder="My name is...">
+            <input type="submit" id="subbtn">
+        </form>
+        <span>오늘은? </span>
+        <span class="today"></span>
+        <span> 입니다.</span><br>
+        <span>프론트엔드 종강까지 </span>
+        <span class="dday"></span>
+        <span> 일 남았습니다 :)</span><br>
+        <span>종강일은 </span>
+        <span id="end"></span>
+        <span>입니다!</span>
+    </div>
+    <article>
+        <h3>현재 시간은?</h3>
+        <div id="nowtime"></div>
+    </article>
+    <div class="ex-2">
+        <span>그린스터디는 매주 </span>
+        <span id="mon"></span>
+        <span>입니다.</span><br>
+        <span>다음 스터디까지 </span>
+        <span id="dday"></span>
+        <span> 일 남았습니다 :)</span><br>
+    </div>
+    <div class="who">
+        금주당번
+    </div>
+
+    <style>
+        *{margin:0; padding:0;}
+        body{
+            position: relative;
+            background:linear-gradient(to right top, pink, yellow);
+            width:100vw; height:100vh;
+            box-sizing: border-box;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .ex-1,.ex-2{
+            width:50%;
+            margin:0 auto;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color:#333;
+        }
+        p{
+            font-size:30px;
+            font-weight: 800;
+            font-style:italic;
+            padding:30px;
+        }
+        input{
+            width:250px;
+            margin-bottom:30px;
+            padding:10px;
+            background:none;
+            border:none;
+            border-bottom:1px solid #333;
+        }
+        input:focus{outline:none;}
+        #subbtn{
+            font-size:0;
+            display:none;
+        }
+        article{
+            width:50%;
+            margin:0 auto;
+            text-align: center;
+            padding:50px 0;
+        }
+        #nowtime{
+            font-weight: 900;
+            font-size: 80px;
+        }
+        .who{
+            position:absolute;
+            left:10px; top:10px;
+            padding:20px 30px;
+            background:black;
+            color:white;
+            border-radius:20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+    </style>
+
+    <script>
+        //MEMO 이름 랜덤 호출 
+        const elWho = document.querySelector('.who');
+        let who = ['김지용','박선후','윤지화','진가영','최주은'];
+        let num = Math.floor( Math.random() * who.length );
+
+        elWho.innerHTML = `금주당번 ${who[num]}`;
+        
+
+
+
+        //MEMO 쿠키를 이용한 사용자 이름 기억 
+        const elP = document.querySelector('p');
+        const elName = document.querySelector('#namebtn');
+        const elBt = document.querySelector('#subbtn');
+
+        elBt.addEventListener('click',function(e){
+            document.cookie = elName.value;
+        })
+        if(document.cookie != ''){
+            elP.innerHTML = `Hello, ${document.cookie}!`;
+            elName.style = 'display:none;';
+        }
+
+
+
+        //MEMO 오늘날짜, 디데이, 종강날짜 
+        let today = new Date();
+        let kyou = document.querySelector('.today');
+        let dDay = document.querySelector('.dday');
+        let todayis = '';
+        let i=today.getDay();
+        let week = ['일','월','화','수','목','금','토'];
+
+        function DDay(){
+            todayis += today.getFullYear() + '년 ';
+            todayis += today.getMonth()+1 + '월 ';
+            todayis += today.getDate() + '일 ';
+            todayis += week[i] + '요일';
+            kyou.innerHTML = todayis;
+            
+            const endDay = new Date('2021-11-02');
+            i = endDay.getDay();
+            let calcday = Math.round((endDay - today) / (24*60*60*1000));
+            if(calcday == 0){dDay.innerHTML = 'D-DAY'}
+            else{dDay.innerHTML = calcday;}
+            
+            end.innerHTML += endDay.getFullYear() + '년 ';
+            end.innerHTML += endDay.getMonth()+1 + '월 ';
+            end.innerHTML += endDay.getDate() + '일 ';
+            end.innerHTML += week[i] + '요일 ';
+        }
+        DDay();
+
+
+
+
+        //MEMO 현재시간 (실시간 워치)
+        function getTime(){
+            let today = new Date(),
+            time = today.getHours(),
+            min = today.getMinutes(),
+            sec = today.getSeconds();
+            
+            if(time < 10){time = `0${time}`;};
+            if(min < 10){min = `0${min}`;};
+            if(sec < 10){sec = `0${sec}`;};
+            
+            nowtime.innerHTML = time + ':' + min + ':' + sec;
+        };
+        getTime();
+        setInterval(getTime,1000);
+
+
+
+
+
+        //MEMO 스터디 디데이 
+        let studyday = ['일','월','화','수','목','금','토'];
+        let monDay = new Date('2021-08-09');
+        let stdday = Math.round((monDay - today) / (24*60*60*1000));
+        mon.innerHTML = studyday[1] + '요일 21시 ';
+        
+        function study(){
+            if(stdday <= -1){
+                monDay.setDate(monDay.getDate() + 7);
+                stdday = Math.round((monDay - today) / (24*60*60*1000));
+                dday.innerHTML = stdday + '일';
+            }else if(stdday == 0){
+                dday.innerHTML = 'D-DAY';
+            }else{
+                dday.innerHTML = stdday + '일';
+            }
+        }
+        study();
+        setInterval(study,60000);
+
+
+
+
+
+
+
+
+
+        //MEMO style 
+        kyou.style = 'font-weight:900; color:#000;';
+        dDay.style = 'font-weight:900; color:#000;';
+        end.style = 'font-weight:900; color:#000;';
+        mon.style = 'font-weight:900; color:#000;';
+        dday.style = 'font-weight:900; color:red;';
+        
+        
+        </script>
+    
+</body>
+</html>
