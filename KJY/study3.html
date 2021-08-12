@@ -152,6 +152,7 @@
         function whenIsStudyDay(){ 
             let today = new Date();
             let dateDiff = studyDay.getTime() - today.getTime();
+
             if(dateDiff < 0) plus7Days(today); 
             // 날짜가 지났으면 오늘날짜를 plusSeven에 전달
             dateDiff = studyDay.getTime() - today.getTime(); // dateDiff 다시 세팅
@@ -164,6 +165,7 @@
 
             h2.innerHTML = `다음 스터디까지 ${studyDays}일 ${studyHours}시간 ${studyMins}분 ${studyScns}초 남았어요😭` 
         }
+
         whenIsStudyDay();
         setInterval(whenIsStudyDay, 1000);
 
@@ -173,6 +175,7 @@
         function randomOrder(){
             names.forEach((name)=>{
                 name.style.order = Math.floor(Math.random()*1000);
+                console.log(Math.floor(Math.random()*1000));
             }); // 반복문으로 각 li들에게 order값을 랜덤으로 지정
         };
         randomOrder();

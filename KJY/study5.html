@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .clock{
+            width: 500px; height: 500px;
+            border: 1px solid; border-radius: 250px;
+            position: relative;
+        }
+        div{
+            position: absolute;
+            top:50%; left:50%;
+            transform: translate(-50%, -100%);
+            transform-origin: 50% 100%;
+            border: 1px solid; text-align: center;
+        }
+        .hour{height:140px;}
+        .minute{height:210px;}
+        .second{height:200px;}
+    </style>
+
+    <article class="clock">
+        <div class="hour">시</div>
+        <div class="minute">분</div>
+        <div class="second">초</div>
+    </article>
+
+    <script>
+        const hourChim = document.querySelector(".hour");
+        const minuteChim = document.querySelector(".minute");
+        const secondChim = document.querySelector(".second");
+
+        function timeNow(){
+            const time = new Date();
+            let hourNow = time.getHours();
+            if(hourNow > 12) hourNow -= 12;
+            const minuteNow = time.getMinutes();
+            const secondNow = time.getSeconds();
+            
+            hourChim.style.transform = `translate(-50%, -100%) rotate(${hourNow * 30}deg)`;
+            minuteChim.style.transform = `translate(-50%, -100%) rotate(${minuteNow * 6}deg)`;
+            secondChim.style.transform = `translate(-50%, -100%) rotate(${secondNow * 6}deg)`;
+            hourChim.innerHTML = `${hourNow}<br>시`;
+            minuteChim.innerHTML = `${minuteNow}<br>분`;
+            secondChim.innerHTML = `${secondNow}<br>초`;
+        }
+        setInterval(timeNow, 1000);
+        timeNow();
+    </script>
+
+
+</body>
+</html>
