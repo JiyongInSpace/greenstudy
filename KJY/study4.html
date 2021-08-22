@@ -35,8 +35,7 @@
 
         function remember(e){
             e.preventDefault();
-            document.cookie = `username=${input.value};path=/`;
-
+            document.cookie = `username=${input.value};`;
             input.value = '';
             hello(); //입력시 인사
         }
