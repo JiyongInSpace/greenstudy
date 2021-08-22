@@ -30,18 +30,20 @@ let degSec;
 let degMin;
 let degHour;
 
+
 function time(){
     let today = new Date();
     let getSec = today.getSeconds();
     let getMin = today.getMinutes();
     let getHour = today.getHours();
+    let getMSec = today.getMilliseconds();
 
-    degSec = getSec * 6; //TODO 현재 초 * 6 
+    degSec = getMSec * 0.006; //TODO 현재 밀리초 * 0.006 
     degMin = getMin * 6; //TODO 현재 분 * 6 
     degHour = getMin * 0.5; //TODO 현재 분 * 0.5 
 
-    //TODO 현재 초 * 6한 값을 초침의 rotate에 출력 
-    sec.style=`transform:translateX(-50%)  rotate(${degSec}deg);`;
+    //TODO <현재 초 * 0.6> + <현재 밀리초 * 0.006>한 값을 초침의 rotate에 출력 
+    sec.style=`transform:translateX(-50%)  rotate(${degSec+(getSec*6)}deg);`;
     //TODO 현재 분 * 6한 값은 분침의 rotate에 출력 
     min.style= `transform: translateX(-50%) rotate(${degMin}deg);`;
     //TODO <현재 시간 * 30> + <현재 분 * 0.5> 한 값을 시침의 rotate에 출력 
@@ -62,8 +64,7 @@ function time(){
     now.innerHTML = `${getHour}시 ${getMin}분 ${getSec}초`;
 }
 time();
-setInterval(time,1000); //MEMO 함수 1초마다 재실행하여 실시간 워치 구현 
-
+setInterval(time,1); //MEMO 함수를 밀리1초마다 재실행하여 실시간 워치 구현 
 
 </script>
 
