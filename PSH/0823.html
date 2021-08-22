@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0823</title>
+    <link href="css/0823.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="clock">
+    <div class="text">
+        <span>현재 시간 </span>
+        <span id="now"></span>
+    </div>
+    <div class="circle">
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+    </div>
+</div>
+
+<script>
+    const hour = document.querySelector('.hour'),
+    min = document.querySelector('.min'),
+    sec = document.querySelector('.sec');
+    let degSec;
+    let degMin;
+    let degHour;
+    
+    function time(){
+        let today = new Date();
+        let getSec = today.getSeconds();
+        let getMin = today.getMinutes();
+        let getHour = today.getHours();
+
+        degSec = getSec * 6;
+        degMin = getMin * 6;
+        degHour = getMin * 0.5;
+
+
+        sec.style=`transform:translateX(-50%)  rotate(${degSec}deg);`;
+        min.style= `transform: translateX(-50%) rotate(${degMin}deg);`;
+        hour.style= `transform:translateX(-50%) rotate(${degHour+(getHour*30)}deg);`;
+
+        if(getSec <10){
+            getSec = `0${getSec}`;
+        }
+        if(getMin <10){
+            getMin = `0${getMin}`;
+        }
+        if(getHour <10){
+            getHour = `0${getHour}`;
+        }
+        now.innerHTML = `${getHour}시 ${getMin}분 ${getSec}초`;
+    }
+    time();
+    setInterval(time,1000);
+</script>
+
+</body>
+</html>

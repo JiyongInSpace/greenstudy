@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: -webkit-gradient(linear, left bottom, right top, from(skyblue), to(pink));
+  background: linear-gradient(to right top, skyblue, pink);
+}
+
+body .clock {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body .clock .text {
+  text-align: center;
+  margin: 30px;
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 30px;
+}
+
+body .clock .circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 10px solid black;
+  border-radius: 250px;
+}
+
+body .clock .circle .hour {
+  position: absolute;
+  left: 50%;
+  top: 40px;
+  width: 4px;
+  height: 60px;
+  background: #000;
+  -webkit-transform: translateX(-50%) rotate(120deg);
+          transform: translateX(-50%) rotate(120deg);
+  -webkit-transform-origin: center bottom;
+          transform-origin: center bottom;
+}
+
+body .clock .circle .min {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  -webkit-transform: translateX(-50%) rotate(0deg);
+          transform: translateX(-50%) rotate(0deg);
+  -webkit-transform-origin: center bottom;
+          transform-origin: center bottom;
+  width: 3px;
+  height: 90px;
+  background: #000;
+}
+
+body .clock .circle .sec {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  -webkit-transform: translateX(-50%) rotate(0deg);
+          transform: translateX(-50%) rotate(0deg);
+  -webkit-transform-origin: center bottom;
+          transform-origin: center bottom;
+  width: 2px;
+  height: 90px;
+  background: #000;
+}
+/*# sourceMappingURL=0823.css.map */
