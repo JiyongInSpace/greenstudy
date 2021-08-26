@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="circle">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="se" id="se"></div>
+        </div>
+    </div>
+    
+    <style>
+        *{margin: 0; padding: 0; box-sizing: border-box;}
+        body{width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center;}
+        .circle{background: url(clock1.png) no-repeat center center; border-radius: 50%; width: 350px; height: 350px; display: flex; background-size: cover; border: 4px solid #1f1f1f; justify-content: center; align-items: center;}
+        
+        .circle:before {content: ''; position: absolute ; width: 15px; height: 15px; background: #f00; border-radius: 50%; z-index: 1000; }
+
+        .circle .hour, .circle .min,  .circle .sec {position: absolute;}
+
+        .circle .hour, .hr{width: 160px; height: 160px;}
+        .circle .min, .mn{width: 190px; height: 190px;}
+        .circle .sec, .se{width: 230px; height: 230px;}
+        
+        .hr, .mn, .se{display: flex; justify-content: center; position: absolute; border-radius: 50%;}
+
+        .hr:before{
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 80px;
+            background: #dfdfdf;
+            z-index: 10;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .mn:before{
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 90px;
+            background: #d6d6d6;
+            z-index: 10;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .se:before{
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 150px;
+            background: rgb(121, 15, 15);
+            z-index: 12;
+            border-radius: 6px 6px 0 0;
+        }
+    </style>
+    
+    <script>
+
+    
+        setInterval(function(){
+            let today = new Date();   
+            
+            let hours = today.getHours(); // 시
+            let minutes = today.getMinutes();  // 분
+            let seconds = today.getSeconds();  // 초
+            let milliseconds = today.getMilliseconds(); // 밀리초
+
+            var h = 30*hours;
+            var m = 6*minutes;
+            var s = 6*seconds;
+
+//            console.log(minutes);
+//            console.log(seconds);
+
+            hr.style.transform = `rotate(${h}deg)`;
+            mn.style.transform = `rotate(${m}deg)`;
+            se.style.transform = `rotate(${s}deg)`;
+            
+        });
+        
+
+
+    </script>
+</body>
+</html>
