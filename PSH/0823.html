@@ -38,17 +38,24 @@ function time(){
     let getHour = today.getHours();
     let getMSec = today.getMilliseconds();
 
+    // 초침은 초당 360/60 = 6도 이동 / 분당 360도 이동
+    // 분침은 분당 360/60 = 6도  이동
+    // 시침은 분당 30/60 = 0.5도 이동
+
     degSec = getMSec * 0.006; //TODO 현재 밀리초 * 0.006 
     degMin = getMin * 6; //TODO 현재 분 * 6 
     degHour = getMin * 0.5; //TODO 현재 분 * 0.5 
 
-    //TODO <현재 초 * 0.6> + <현재 밀리초 * 0.006>한 값을 초침의 rotate에 출력 
-    sec.style=`transform:translateX(-50%)  rotate(${degSec+(getSec*6)}deg);`;
-    //TODO 현재 분 * 6한 값은 분침의 rotate에 출력 
-    min.style= `transform: translateX(-50%) rotate(${degMin}deg);`;
     //TODO <현재 시간 * 30> + <현재 분 * 0.5> 한 값을 시침의 rotate에 출력 
     hour.style= `transform:translateX(-50%) rotate(${degHour+(getHour*30)}deg);`;
-    //MEMO 현재 분 * 0.5 값을 더해주는 이유 -> 현재시간*30으로만 출력할 경우 시침이 서서히 움직이는게 아니라 한 시간 단위로 위치가 갑자기 변경됨 
+    //MEMO 현재 분 * 0.5 값을 더해주는 이유는? 
+    //MEMO 현재시간*30으로만 출력할 경우 시침이 서서히 움직이는게 아니라 한 시간 단위로 위치가 갑자기 변경됨 
+
+    //TODO 현재 분 * 6한 값은 분침의 rotate에 출력 
+    min.style= `transform: translateX(-50%) rotate(${degMin}deg);`;
+
+    //TODO <현재 초 * 0.6> + <현재 밀리초 * 0.006>한 값을 초침의 rotate에 출력 
+    sec.style=`transform:translateX(-50%)  rotate(${degSec+(getSec*6)}deg);`;
 
 
     //TODO 현재시간 텍스트로 출력 
