@@ -181,18 +181,22 @@ body main .con-2 .todo-form input {
 
 body main .con-2 .todo-form input::-webkit-input-placeholder {
   font-size: 16px;
+  color: #999;
 }
 
 body main .con-2 .todo-form input:-ms-input-placeholder {
   font-size: 16px;
+  color: #999;
 }
 
 body main .con-2 .todo-form input::-ms-input-placeholder {
   font-size: 16px;
+  color: #999;
 }
 
 body main .con-2 .todo-form input::placeholder {
   font-size: 16px;
+  color: #999;
 }
 
 body main .con-2 .todo-form input:focus {
@@ -215,7 +219,7 @@ body main .con-2 .todo-goal ul li {
   cursor: pointer;
 }
 
-body main .con-2 .todo-goal ul li .checked {
+body main .con-2 .todo-goal ul li span.unchecked {
   color: #999;
 }
 
@@ -243,7 +247,7 @@ body main .con-2 .todo-goal ul li img {
   margin-right: 5px;
 }
 
-body main .con-2 .unchecked {
+body main .con-2 img.unchecked {
   opacity: 0.15;
 }
 /*# sourceMappingURL=index.css.map */
