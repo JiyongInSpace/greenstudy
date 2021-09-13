@@ -140,10 +140,14 @@ body main .con-2 .todo-goal .goal {
   background: #eee;
   border-radius: 10px;
   font-weight: 900;
+  cursor: pointer;
+}
+
+body main .con-2 .todo-goal .goal:hover {
+  background: lightgray;
 }
 
 body main .con-2 .todo-goal .goal .list-add {
-  cursor: pointer;
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -153,13 +157,12 @@ body main .con-2 .todo-goal .goal .list-add {
   line-height: 20px;
   font-size: 15px;
   margin-left: 5px;
+  pointer-events: none;
 }
 
 body main .con-2 .todo-form {
   margin-top: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -201,6 +204,12 @@ body main .con-2 .todo-form input::placeholder {
 
 body main .con-2 .todo-form input:focus {
   outline: none;
+}
+
+body main .con-2 .todo-form.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 body main .con-2 .todo-goal ul {

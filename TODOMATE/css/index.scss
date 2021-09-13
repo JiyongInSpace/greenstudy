@@ -100,9 +100,12 @@ main{
             background: #eee;
             border-radius: 10px;
             font-weight: 900;
+            cursor: pointer;
+            &:hover{
+                background: lightgray;
+            }
         }
         .todo-goal .goal .list-add{
-            cursor: pointer;
             display:inline-block;
             width:20px; height:20px;
             background: #fff;
@@ -111,10 +114,11 @@ main{
             line-height: 20px;
             font-size:15px;
             margin-left:5px;
+            pointer-events: none;
         }
         .todo-form{
             margin-top:10px;
-            display:flex;
+            display:none;
             align-items: center;
             gap:5px;
             img{width:20px}
@@ -133,6 +137,7 @@ main{
             input:focus{
                 outline: none;
             }
+            &.show{display: flex;}
         }
         .todo-goal ul{
             padding-bottom:30px;

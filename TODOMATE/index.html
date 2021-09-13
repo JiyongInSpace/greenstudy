@@ -7,6 +7,7 @@
     <link href="css/index.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/logo.png">
     <link rel="apple-touch-icon-precomposed" sizes="114*114" href="img/logo.png">
+    <script src="js/todolist.js" defer></script>
 </head>
 <body>
 
@@ -39,14 +40,14 @@
         <h1>Feed</h1>
         <div class="todo-list">
             <div class="todo-goal">
-                <div class="goal">목표1<span class="list-add">+</span></div>
+                <div class="goal keep-show">목표1<span class="list-add">+</span></div>
                 <!-- form은 list-add 클릭했을때 나타나기 -->
                 <form class="todo-form">
-                    <img src="img/check-ok.png" class="unchecked">
-                    <input type="text" placeholder="입력">
+                    <img src="img/check-ok.png" class="unchecked keep-show">
+                    <input class="todo-input keep-show" type="text" placeholder="입력">
                 </form>
-                <ul>
-                    <li>
+                <ul class="todo-ul">
+                    <!-- <li>
                         <img src="img/check-ok.png" class="checked">
                         <span class="checked">운동하기</span>
                         <div class="more-btn">
@@ -63,12 +64,12 @@
                             <span></span>
                             <span></span>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="todo-goal">
                 <div class="goal">목표2<span class="list-add">+</span></div>
-                <ul>
+                <ul class="todo-ul">
                     <li>
                         <img src="img/check-ok.png" class="unchecked">
                         <span class="unchecked">비타민먹기</span>
