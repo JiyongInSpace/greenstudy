@@ -59,7 +59,6 @@ if(savedTodos !== null){ // 로컬스토리지에 저장되어있으면 불러�
 
 //MEMO add goal 
 function showGoalForm(){
-    
     if(goalForm.classList.contains('show')) {
         goalForm.classList.remove('show');
         addGoal.classList.remove('active');
@@ -108,4 +107,5 @@ goalForm.addEventListener("submit",function(e){
     e.preventDefault();
     saveGoal();
     goalForm.classList.remove('show');
+    addGoal.classList.remove('active');
 });
