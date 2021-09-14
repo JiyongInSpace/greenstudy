@@ -116,9 +116,99 @@ body main .con-2 {
   height: 100%;
 }
 
-body main .con-2 h1 {
-  font-family: 'Do Hyeon', sans-serif;
+body main .con-2 .list-hd {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 20px;
+  gap: 10px;
+}
+
+body main .con-2 .list-hd h1 {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+body main .con-2 .list-hd span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #999;
+  border-radius: 30px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+body main .con-2 .list-hd span:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+}
+
+body main .con-2 .list-hd span.active {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+body main .con-2 .list-hd .goal-input {
+  display: none;
+}
+
+body main .con-2 .list-hd .goal-input input {
+  font-size: 16px;
+  width: 100%;
+  padding: 5px 10px 5px 0;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid #000;
+}
+
+body main .con-2 .list-hd .goal-input input::-webkit-input-placeholder {
+  font-size: 16px;
+  color: #999;
+}
+
+body main .con-2 .list-hd .goal-input input:-ms-input-placeholder {
+  font-size: 16px;
+  color: #999;
+}
+
+body main .con-2 .list-hd .goal-input input::-ms-input-placeholder {
+  font-size: 16px;
+  color: #999;
+}
+
+body main .con-2 .list-hd .goal-input input::placeholder {
+  font-size: 16px;
+  color: #999;
+}
+
+body main .con-2 .list-hd .goal-input input:focus {
+  outline: none;
+}
+
+body main .con-2 .list-hd .goal-input.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 body main .con-2 .todo-list {

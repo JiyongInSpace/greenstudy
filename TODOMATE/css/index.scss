@@ -81,9 +81,56 @@ main{
     .con-2{
         width:60%;
         height:100%;
-        h1{
-            font-family: 'Do Hyeon', sans-serif;
+        .list-hd{
+            display:flex;
+            justify-content:flex-start;
+            align-items: center;
             margin-bottom:20px;
+            gap:10px;
+            h1{
+                font-family: 'Do Hyeon', sans-serif;
+            }
+            span{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                width:30px; height:30px;
+                background:#fff;
+                color:#000;
+                border:1px solid #999;
+                border-radius: 30px;
+                cursor: pointer;
+                transition: transform 0.5s;
+            }
+            span:hover{
+                background:#000;
+                color:#fff;
+                border:1px solid #000;
+            }
+            span.active{
+                transform: rotate(45deg);
+            }
+            .goal-input{
+                display:none;
+            }
+            .goal-input input{
+                font-size:16px;
+                width:100%;
+                padding:5px 10px 5px 0;
+                background:none;
+                border:0;
+                border-bottom:2px solid #000;
+            }
+            .goal-input input::placeholder{
+                font-size:16px;
+                color:#999;
+            }
+            .goal-input input:focus{
+                outline: none;
+            }
+            .goal-input.show{
+                display:flex;
+            }
         }
         .todo-list{
             width:100%;
