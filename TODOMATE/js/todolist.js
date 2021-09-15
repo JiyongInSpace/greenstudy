@@ -176,4 +176,5 @@ goalForm.addEventListener("submit",function(e){
     e.preventDefault();
     saveGoal();
     goalForm.classList.remove('show');
+    addGoal.classList.remove('active');
 });
