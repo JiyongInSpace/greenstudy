@@ -261,6 +261,7 @@ body main .con-2 .todo-form {
 
 body main .con-2 .todo-form img {
   width: 20px;
+  opacity: 0.15;
 }
 
 body main .con-2 .todo-form input {
@@ -318,8 +319,20 @@ body main .con-2 .todo-goal ul li {
   cursor: pointer;
 }
 
-body main .con-2 .todo-goal ul li span.unchecked {
+body main .con-2 .todo-goal ul li span {
   color: #999;
+}
+
+body main .con-2 .todo-goal ul li img {
+  opacity: 0.15;
+}
+
+body main .con-2 .todo-goal ul li.checked span {
+  color: unset;
+}
+
+body main .con-2 .todo-goal ul li.checked img {
+  opacity: 1;
 }
 
 body main .con-2 .todo-goal ul li .more-btn {
@@ -346,7 +359,72 @@ body main .con-2 .todo-goal ul li img {
   margin-right: 5px;
 }
 
-body main .con-2 img.unchecked {
-  opacity: 0.15;
+.modal-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 1;
+}
+
+.modal-bg .todo-modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 200px;
+  height: 100px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.modal-bg .todo-modal-icon {
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.modal-bg .todo-modal-icon span {
+  pointer-events: none;
+}
+
+.modal-bg .todo-modal-icon span:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 50%;
+  width: 100%;
+  height: 40px;
+  background-color: #f0f0f0;
+}
+
+.modal-bg .todo-modal-icon span:last-child {
+  font-size: 0.7em;
+}
+
+.modal-bg.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=index.css.map */
