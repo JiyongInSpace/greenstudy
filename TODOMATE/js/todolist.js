@@ -36,6 +36,17 @@ if(savedTodos !== null){
         })
 }
 
+//burger-menu
+// nav menu - burger menu
+(function() {
+    var burgerMenu = document.getElementsByClassName('b-menu')[0];
+    var burgerNav = document.getElementsByClassName('b-nav')[0];
+
+    burgerMenu.addEventListener('click', function toggleClasses() {
+            this.classList.toggle('open');
+            burgerNav.classList.toggle('open');
+    }, false);
+})();
 
 //MEMO add list 
 function showForm(){ //form 보여주기

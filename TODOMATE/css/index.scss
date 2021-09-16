@@ -7,12 +7,132 @@
     // font-size:16px;
 }
 
+// burger menu
+@-webkit-keyframes slideInLeft {
+    0% {
+        transform: translate3d(250px, 0, 0);
+        visibility: visible;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes slideInLeft {
+    0% {
+        transform: translate3d(250px, 0, 0);
+        visibility: visible;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@-webkit-keyframes slideOutLeft {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(250px, 0, 0);
+        visibility: hidden;
+    }
+}
+@keyframes slideOutLeft {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(250px, 0, 0);
+        visibility: hidden;
+    }
+}
+
+.b-menu {
+    cursor: pointer;
+    display: inline-block;
+    height: 38px;
+    padding-left: 15px;
+    padding-top: 15px;
+    position: relative;
+    transition: all 0.4s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 38px;
+    z-index: 12;
+    transform:translateX(3px);
+}
+
+.b-bun {
+    background: #444444;
+    position: relative;
+    transition: all 0.4s ease;
+}
+.b-bun--top {
+    height: 2px;
+    top: 0;
+    width: 25px;
+}
+.b-bun--mid {
+    height: 2px;
+    top: 8px;
+    width: 25px;
+}
+.b-bun--bottom {
+    height: 2px;
+    top: 16px;
+    width: 25px;
+}
+
+.b-nav:not(.open) {
+    visibility: hidden;
+}
+.b-nav a:not(.open) {
+    -webkit-animation-duration: 0.4s;
+            animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-animation-name: slideOutLeft;
+            animation-name: slideOutLeft;
+}
+.b-nav.open {
+    visibility: visible;
+}
+.b-nav.open a {
+    -webkit-animation-duration: 0.4s;
+            animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-animation-name: slideInLeft;
+            animation-name: slideInLeft;
+    display:block;
+}
+
+.b-nav:hover:not(.open) .bun-top,
+.b-nav:hover:not(.open) .bun-mid,
+.b-nav:hover:not(.open) .bun-bottom {
+background: white;
+}
+
+.b-menu.open .b-bun--top {
+background: #444444;
+top: 9px;
+transform: rotate(45deg);
+}
+.b-menu.open .b-bun--mid {
+opacity: 0;
+}
+.b-menu.open .b-bun--bottom {
+background: #444444;
+top: 5px;
+transform: rotate(-45deg);
+}
+// burger menu end
+
 body{
 position: relative;
 height:100vh;
 overflow: hidden;
 header{
-    display:flex;
     width:100%;
     height:10%;
     background:rgb(247, 247, 247);
