@@ -73,7 +73,8 @@ function addList(e){ //추가할때마다 todoArr 배열에 추가하고 li 생�
 function writeList(todo){ // li 생성 함수
     const li = document.createElement('li');
     li.id = todo.id;
-    if(todo.checked) li.className = "checked";
+    li.className = "todo-li";
+    if(todo.checked) li.classList.add("checked");
     li.addEventListener("click", showModal);
     const img = document.createElement('img');
     img.src = "img/check-ok.png";
@@ -88,7 +89,13 @@ function writeList(todo){ // li 생성 함수
     li.appendChild(div);
     return li;
 }
-
+function deleteList(id){
+    const lists = document.querySelectorAll(".todo-li");
+    lists.forEach(list => list.id === id ? list.remove() : list);
+    todoArr = todoArr.filter(todo => todo.id*1 !== id*1);
+    localStorage.setItem("todos", JSON.stringify(todoArr));
+    todoModal.classList.remove("show");
+}
 //MEMO add goal 
 function showGoalForm(){
     if(goalForm.classList.contains('show')) {
@@ -158,8 +165,7 @@ function modalClicks(e){
     if(e.target === e.currentTarget){
         todoModal.classList.remove("show");
     } else if(e.target.classList.contains("delete")){
-        console.log("delete");
-        console.log(this.dataset.id);
+        deleteList(this.dataset.id);
     } else if(e.target.classList.contains("edit")){
         console.log("edit");
         console.log(this.dataset.id);
