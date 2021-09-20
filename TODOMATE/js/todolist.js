@@ -195,3 +195,67 @@ goalForm.addEventListener("submit",function(e){
     goalForm.classList.remove('show');
     addGoal.classList.remove('active');
 });
+
+
+
+
+//-----------------------달력--------------------------------//
+const calendarBox = document.querySelector(".calendar-box");
+const calenderHd = document.querySelector(".cal-hd");
+const calTable  = document.querySelector(".cal-table")
+
+let today = new Date();
+let date = new Date();
+
+
+
+function prevCalendar() {
+     today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+     buildCalendar();
+    }
+
+function nextCalendar() {
+    today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+    buildCalendar();
+}
+
+function buildCalendar(){
+    let doMonth = new Date(today.getFullYear(),today.getMonth(),0);
+    let lastDate = new Date(today.getFullYear(),today.getMonth()+1,0);
+
+    calenderHd.innerHTML = today.getFullYear() + "년" + (today.getMonth() + 1) + "월"; 
+
+    while (calTable.rows.length > 1) {
+        calTable.deleteRow(calTable.rows.length-1);
+    }
+    
+    let row = null;
+    let cnt = 0;
+
+    row = calTable.insertRow();
+
+    for (i=0; i<doMonth.getDay(); i++) {
+        cell = row.insertCell();
+        cnt = cnt + 1;
+     }
+    for (i=1; i<=lastDate.getDate(); i++) { 
+        cell = row.insertCell();
+        cell.innerHTML = i;
+        cnt = cnt + 1;
+
+    if (cnt%7 == 0) {
+        cell.innerHTML = "<font color=red>" + i
+        row = calTable.insertRow();
+    }    
+    if (cnt%7 == 6){
+        cell.innerHTML = "<font color=blue>" + i
+    }
+    if (today.getFullYear() == date.getFullYear()
+        && today.getMonth() == date.getMonth()
+        && i == date.getDate()) {
+            cell.bgColor = "yellow";   
+        }
+    }
+}
+
+    buildCalendar()
