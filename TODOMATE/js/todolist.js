@@ -207,14 +207,12 @@ const calTable  = document.querySelector(".cal-table")
 let today = new Date();
 let date = new Date();
 
-
-
-function prevCalendar() {
+function prevCalendar(){
      today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
      buildCalendar();
-    }
+}
 
-function nextCalendar() {
+function nextCalendar(){
     today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
     buildCalendar();
 }
@@ -222,40 +220,37 @@ function nextCalendar() {
 function buildCalendar(){
     let doMonth = new Date(today.getFullYear(),today.getMonth(),0);
     let lastDate = new Date(today.getFullYear(),today.getMonth()+1,0);
-
-    calenderHd.innerHTML = today.getFullYear() + "년" + (today.getMonth() + 1) + "월"; 
-
+    calenderHd.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월"; 
     while (calTable.rows.length > 1) {
         calTable.deleteRow(calTable.rows.length-1);
     }
-    
     let row = null;
     let cnt = 0;
-
     row = calTable.insertRow();
-
-    for (i=0; i<doMonth.getDay(); i++) {
+    for(i=0; i<doMonth.getDay(); i++) {
         cell = row.insertCell();
         cnt = cnt + 1;
      }
-    for (i=1; i<=lastDate.getDate(); i++) { 
+    for(i=1; i<=lastDate.getDate(); i++) { 
         cell = row.insertCell();
-        cell.innerHTML = i;
+        cell.innerHTML = `<img src ="img/check-ok.png"><br/> ${i}`;
         cnt = cnt + 1;
 
-    if (cnt%7 == 0) {
-        cell.innerHTML = "<font color=red>" + i
+        if(cnt%7 == 6){
+        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#8abfe8><br/> ${i}`;
+        }
+        if(cnt%7 == 0) {
+        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#e06547><br/> ${i}`;
         row = calTable.insertRow();
-    }    
-    if (cnt%7 == 6){
-        cell.innerHTML = "<font color=blue>" + i
-    }
-    if (today.getFullYear() == date.getFullYear()
-        && today.getMonth() == date.getMonth()
-        && i == date.getDate()) {
+        }    
+        
+
+        
+        if(today.getFullYear() == date.getFullYear()
+            && today.getMonth() == date.getMonth()
+            && i == date.getDate()) {
             cell.bgColor = "yellow";   
         }
     }
 }
-
-    buildCalendar()
+buildCalendar()

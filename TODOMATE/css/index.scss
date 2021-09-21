@@ -196,7 +196,41 @@ main{
     justify-content: space-around;
     .con-1{
         width:40%;
-        height:100%;
+        height:90%;
+        figure{
+            width: 90%;
+            display: flex;
+            button{
+                all:unset;
+                margin: 0 10px;
+            }
+        }
+        :nth-child(2){
+            margin-left: auto;
+        }
+        .cal-table{
+            margin:0;
+            width:90%;
+
+            tbody{
+                margin:0;
+                width:100%;
+                th,td{
+                    width:20px;
+                    display: inline-block;
+                    color:#888;
+                    text-align:center;
+                    border-radius: 50%;
+                }
+                th:not(:nth-child(7)),td:not(:nth-child(7)){
+                    margin-right: calc((100% - 140px)/6);
+                }
+            }
+            img{
+                width:20px; opacity: 0.15;
+                transform:translateY(8px);
+            }
+        }
     }
     .con-2{
         width:60%;
