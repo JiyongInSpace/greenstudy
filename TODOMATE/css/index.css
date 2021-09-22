@@ -406,6 +406,7 @@ body main .con-2 .todo-list {
 }
 
 body main .con-2 .todo-goal {
+  position: relative;
   margin-bottom: 30px;
 }
 
@@ -544,6 +545,24 @@ body main .con-2 .todo-goal ul li .more-btn span {
 body main .con-2 .todo-goal ul li img {
   width: 20px;
   margin-right: 5px;
+}
+
+body main .con-2 .todo-goal > .more-btn2 {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 3px;
+}
+
+body main .con-2 .todo-goal > .more-btn2 span {
+  width: 3px;
+  height: 3px;
+  background: #000;
+  border-radius: 2px;
 }
 
 .modal-bg {

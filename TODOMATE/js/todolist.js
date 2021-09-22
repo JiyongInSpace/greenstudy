@@ -1,13 +1,9 @@
 const todoForms = document.querySelectorAll(".todo-form");
 const todoLi = document.querySelectorAll(".todo-ul li");
-// const todoImg = document.querySelector(".todo-ul li img");
-// const todoText = document.querySelector(".todo-ul li span");
 const todoAll = document.querySelector(".todo-list");
 const addGoal = document.querySelector(".list-hd span");
-// const goalList = document.querySelectorAll(".todo-goal");
 const goalForm = document.querySelector(".goal-input");
 const goalInput = document.querySelector(".goal-input input");
-
 const todoModal = document.querySelector(".modal-bg");
 
 let goalArr = [];
@@ -96,6 +92,7 @@ function deleteList(id){
     localStorage.setItem("todos", JSON.stringify(todoArr));
     todoModal.classList.remove("show");
 }
+
 //MEMO add goal 
 function showGoalForm(){
     if(goalForm.classList.contains('show')) {
@@ -106,6 +103,7 @@ function showGoalForm(){
         addGoal.classList.add('active');
     }
 }
+//////////////// 목표저장
 function saveGoal(){
     const goalObj = {
         text: goalInput.value,
@@ -115,6 +113,7 @@ function saveGoal(){
     goalArr.push(goalObj);
     localStorage.setItem("goals", JSON.stringify(goalArr));
 }
+//////////////// 목표생성
 function createGoal(goal){
     const div = document.createElement('div');
     div.className = "todo-goal";
@@ -140,7 +139,10 @@ function createGoal(goal){
     const ul = document.createElement('ul');
     ul.className = "todo-ul";
     div.appendChild(ul);
-    
+    const btn = document.createElement('div');
+    btn.className="more-btn2";
+    btn.innerHTML="<span></span><span></span><span></span>";
+    div.appendChild(btn);
     todoAll.appendChild(div);
 
     // todoAll.innerHTML += `
@@ -156,6 +158,28 @@ function createGoal(goal){
     goalForm.classList.remove('show');
     goalInput.value="";
 }
+//////////////// 목표모달창
+const goalModify = document.querySelectorAll('.more-btn2');
+const hasClass = todoModal.classList.contains('show')
+const goalDelete = document.querySelector('.modal-bg.goalmodal .todo-modal-icon.delete');
+const todoGoal = document.querySelectorAll('.todo-goal');
+const todoModal2 = document.querySelector(".modal-bg.goalmodal");
+
+todoGoal.forEach(function(v,k){
+    goalModify[k].addEventListener("click",function(){
+        if(!hasClass){
+            todoModal2.classList.add('show')
+        }
+        goalDelete.addEventListener("click",function(){
+            todoGoal[k].remove();
+            todoModal2.classList.remove('show');
+            goalArr = goalArr.filter( (todo)=>todo.id !== parseInt(todoGoal[k].id) )
+            localStorage.setItem("goals", JSON.stringify(goalArr));
+        })
+    })
+})
+
+
 function showModal(e){
     if(e.target.tagName === "IMG") return;
     todoModal.classList.add("show");
