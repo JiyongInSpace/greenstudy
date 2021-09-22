@@ -21,6 +21,6 @@
     session_destroy();
     echo 
     "<script>
-        location.href='login.php';
+        location.href='index.html';
     </script>";
 ?>

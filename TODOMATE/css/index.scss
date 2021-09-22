@@ -47,7 +47,7 @@
 
 .b-menu {
     cursor: pointer;
-    display: inline-block;
+    float:right;
     height: 38px;
     padding-left: 15px;
     padding-top: 15px;
@@ -84,6 +84,8 @@
 }
 
 .b-nav:not(.open) {
+    float:right;
+    width:100px;
     visibility: hidden;
 }
 .b-nav a:not(.open) {
@@ -95,7 +97,12 @@
             animation-name: slideOutLeft;
 }
 .b-nav.open {
+    float:right;
+    width:100px;
     visibility: visible;
+
+    display:fixed;
+    top:0; right:0;
 }
 .b-nav.open a {
     -webkit-animation-duration: 0.4s;
@@ -105,8 +112,14 @@
     -webkit-animation-name: slideInLeft;
             animation-name: slideInLeft;
     display:block;
+    padding:30px 10px 0;
+    background:#999;
+    width:250px;
+    text-decoration: none;
+    color:#fff;
 }
-
+.b-nav.open a:first-of-type{padding-top:100px;}
+.b-nav.open a:last-of-type{padding-bottom:250px;}
 .b-nav:hover:not(.open) .bun-top,
 .b-nav:hover:not(.open) .bun-mid,
 .b-nav:hover:not(.open) .bun-bottom {
@@ -137,11 +150,15 @@ header{
     height:10%;
     background:rgb(247, 247, 247);
     border-bottom:1px solid #ddd;
+/* 
     display:flex;
     justify-content: space-between;
     align-items: center;
+ */
     padding: 0 5%;
     h2{
+        padding-top:15px;
+        display:inline-block;
         font-family: 'Do Hyeon', sans-serif;
     }
     nav{
@@ -196,7 +213,41 @@ main{
     justify-content: space-around;
     .con-1{
         width:40%;
-        height:100%;
+        height:90%;
+        figure{
+            width: 90%;
+            display: flex;
+            button{
+                all:unset;
+                margin: 0 10px;
+            }
+        }
+        :nth-child(2){
+            margin-left: auto;
+        }
+        .cal-table{
+            margin:0;
+            width:90%;
+
+            tbody{
+                margin:0;
+                width:100%;
+                th,td{
+                    width:20px;
+                    display: inline-block;
+                    color:#888;
+                    text-align:center;
+                    border-radius: 50%;
+                }
+                th:not(:nth-child(7)),td:not(:nth-child(7)){
+                    margin-right: calc((100% - 140px)/6);
+                }
+            }
+            img{
+                width:20px; opacity: 0.15;
+                transform:translateY(8px);
+            }
+        }
     }
     .con-2{
         width:60%;

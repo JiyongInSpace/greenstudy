@@ -45,11 +45,27 @@
 
 <!-- MEMO 메인 -->
 <main>
-    <div class="con-1">
-        투두메이트로 치자면 캘린더영역 입니다<br>
+    <div class="con-1 calendar-box">
+        <!-- 투두메이트로 치자면 캘린더영역 입니다<br>
         전체적인 유아이만 봐주세요<br>
         텍스트 등 일단 임의로 넣었어요<br>
-        세부내용은 다 같이 의논해서 조정하는걸로 :)
+        세부내용은 다 같이 의논해서 조정하는걸로 :) -->
+        <figure>
+            <span class="cal-hd"> yyyy년 m월</span>
+            <button onclick="prevCalendar()"><</button>
+            <button onclick="nextCalendar()">></button>
+        </figure>
+        <table class="cal-table">
+            <tr>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+                <th>일</th>
+            </tr> 
+        </table>
     </div>
     <div class="con-2">
         <div class="list-hd">
