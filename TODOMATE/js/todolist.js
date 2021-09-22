@@ -144,17 +144,6 @@ function createGoal(goal){
     btn.innerHTML="<span></span><span></span><span></span>";
     div.appendChild(btn);
     todoAll.appendChild(div);
-
-    // todoAll.innerHTML += `
-    //     <div class="todo-goal" id="${goal.id}">
-    //         <div class="goal">${goal.text}<span class="list-add">+</span></div>
-    //         <form class="todo-form">
-    //             <img src="img/check-ok.png" class="unchecked">
-    //             <input class="todo-input" type="text" placeholder="입력">
-    //         </form>
-    //         <ul class="todo-ul"></ul>
-    //     </div>
-    // `;
     goalForm.classList.remove('show');
     goalInput.value="";
 }
