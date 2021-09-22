@@ -1,13 +1,9 @@
 const todoForms = document.querySelectorAll(".todo-form");
 const todoLi = document.querySelectorAll(".todo-ul li");
-// const todoImg = document.querySelector(".todo-ul li img");
-// const todoText = document.querySelector(".todo-ul li span");
 const todoAll = document.querySelector(".todo-list");
 const addGoal = document.querySelector(".list-hd span");
-// const goalList = document.querySelectorAll(".todo-goal");
 const goalForm = document.querySelector(".goal-input");
 const goalInput = document.querySelector(".goal-input input");
-
 const todoModal = document.querySelector(".modal-bg");
 
 let goalArr = [];
@@ -73,7 +69,8 @@ function addList(e){ //추가할때마다 todoArr 배열에 추가하고 li 생�
 function writeList(todo){ // li 생성 함수
     const li = document.createElement('li');
     li.id = todo.id;
-    if(todo.checked) li.className = "checked";
+    li.className = "todo-li";
+    if(todo.checked) li.classList.add("checked");
     li.addEventListener("click", showModal);
     const img = document.createElement('img');
     img.src = "img/check-ok.png";
@@ -88,6 +85,13 @@ function writeList(todo){ // li 생성 함수
     li.appendChild(div);
     return li;
 }
+function deleteList(id){
+    const lists = document.querySelectorAll(".todo-li");
+    lists.forEach(list => list.id === id ? list.remove() : list);
+    todoArr = todoArr.filter(todo => todo.id*1 !== id*1);
+    localStorage.setItem("todos", JSON.stringify(todoArr));
+    todoModal.classList.remove("show");
+}
 
 //MEMO add goal 
 function showGoalForm(){
@@ -99,6 +103,7 @@ function showGoalForm(){
         addGoal.classList.add('active');
     }
 }
+//////////////// 목표저장
 function saveGoal(){
     const goalObj = {
         text: goalInput.value,
@@ -108,6 +113,7 @@ function saveGoal(){
     goalArr.push(goalObj);
     localStorage.setItem("goals", JSON.stringify(goalArr));
 }
+//////////////// 목표생성
 function createGoal(goal){
     const div = document.createElement('div');
     div.className = "todo-goal";
@@ -133,22 +139,39 @@ function createGoal(goal){
     const ul = document.createElement('ul');
     ul.className = "todo-ul";
     div.appendChild(ul);
-    
+    const btn = document.createElement('div');
+    btn.className="more-btn2";
+    btn.innerHTML="<span></span><span></span><span></span>";
+    div.appendChild(btn);
     todoAll.appendChild(div);
-
-    // todoAll.innerHTML += `
-    //     <div class="todo-goal" id="${goal.id}">
-    //         <div class="goal">${goal.text}<span class="list-add">+</span></div>
-    //         <form class="todo-form">
-    //             <img src="img/check-ok.png" class="unchecked">
-    //             <input class="todo-input" type="text" placeholder="입력">
-    //         </form>
-    //         <ul class="todo-ul"></ul>
-    //     </div>
-    // `;
     goalForm.classList.remove('show');
     goalInput.value="";
 }
+//////////////// 목표모달창
+const goalModify = document.querySelectorAll('.more-btn2');
+const hasClass = todoModal.classList.contains('show')
+const goalDelete = document.querySelector('.modal-bg.goalmodal .todo-modal-icon.delete');
+const todoGoal = document.querySelectorAll('.todo-goal');
+const todoModal2 = document.querySelector(".modal-bg.goalmodal");
+
+todoGoal.forEach(function(v,k){
+    goalModify[k].addEventListener("click",function(){
+        if(!hasClass){
+            todoModal2.classList.add('show')
+        }
+        todoModal2.addEventListener("click",function(){
+            todoModal2.classList.remove('show')
+        })
+        goalDelete.addEventListener("click",function(){
+            todoGoal[k].remove();
+            todoModal2.classList.remove('show');
+            goalArr = goalArr.filter( (todo)=>todo.id !== parseInt(todoGoal[k].id) )
+            localStorage.setItem("goals", JSON.stringify(goalArr));
+        })
+    })
+})
+
+
 function showModal(e){
     if(e.target.tagName === "IMG") return;
     todoModal.classList.add("show");
@@ -158,8 +181,7 @@ function modalClicks(e){
     if(e.target === e.currentTarget){
         todoModal.classList.remove("show");
     } else if(e.target.classList.contains("delete")){
-        console.log("delete");
-        console.log(this.dataset.id);
+        deleteList(this.dataset.id);
     } else if(e.target.classList.contains("edit")){
         console.log("edit");
         console.log(this.dataset.id);
@@ -183,13 +205,11 @@ function checkList(){
 //MEMO 이벤트 실행 
 todoModal.addEventListener("click", modalClicks);
 addGoal.addEventListener("click", showGoalForm);
-goalForm.addEventListener("submit",function(e){
-    e.preventDefault();
+goalForm.addEventListener("submit",function(){
     saveGoal();
     goalForm.classList.remove('show');
     addGoal.classList.remove('active');
 });
-
 
 
 
