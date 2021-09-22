@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Patua+One&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    /* font-family: 'Patua One', cursive; */
+}
+
+html,body{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#chat_thum{
+    position: absolute;
+    bottom:45px;
+    right: 45px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.16);
+    border-radius: 20px;
+    object-fit: cover;
+    width: 100px; height: 100px;
+}
+
+#chat_thum > img{
+    width: 100%; height: 100%;
+}
+
+.wrapper{
+    height: 780px;
+    width: 420px;
+    border-radius: 25px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.16);
+    position: absolute;
+    bottom: 45px; right: 45px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    display: none;
+    transition: all 1s ease-in-out;
+}
+
+.wrapper.show{
+    display: flex;
+}
+
+.wrapper.down{
+    transform: translateY(745px);
+    transition: all 1s ease-in-out;
+}
+
+.user-container{
+    height: 80px;
+    background-color: #000;
+    padding:0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.downClose{
+    background:url(../img/chat_img/downClose.png) no-repeat center center;
+    width: 18px; height: 11px;
+    flex:0.5;
+}
+
+.close{
+    background: url(../img/chat_img/close.png) no-repeat center center;
+    width: 18px; height: 18px;
+    flex:0.5;
+}
+
+.nickname_con{
+    display: flex;
+    align-items: center;
+    flex:9;
+}
+
+.nickname{
+    font-size: 20px;
+    font-family: 'Patua One', cursive;
+    color: #fff;
+}
+
+.user-container .nickIcon{
+    font-size: 20px; 
+    background-color: #fff;
+    width: 42px; height: 42px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 0 15px;
+    font-family: 'Patua One', cursive;
+    border-radius: 50%;
+}
+
+.user-container input{
+    border-radius: 3px;
+    border: none;
+    height: 100%;
+}
+
+.display-container{
+    background-color: #fff;
+    flex: 12;
+    overflow-y: scroll;
+    margin: 25px 15px 0px;
+}
+.input-container{
+    height: 70px;
+    border-top: 2px solid #F0F0F0;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+.input-container span{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.chatting-input{
+    font-size: 12px; 
+    height: 100%;
+    flex: 8;
+    border: none;
+    padding: 20px;
+    font-size: 20px;
+    color: #B1B1B1;
+    outline: none;
+}
+
+.emoji{
+    background: url(../img/chat_img/emoji.png) no-repeat center center;
+    width: 20px; height: 20px;
+    border:none;
+}
+
+.send-button{
+    border: none;
+    height: 21px; width: 18px;
+    background: url(../img/chat_img/send.png) no-repeat center center;
+}
+
+.chatting-list li{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    
+}
+
+.user{
+    font-size: 20px;
+    font-family: 'Patua One', cursive !important;
+    margin-bottom: 5px;
+}
+
+.profile .image{
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    /* box-shadow: 0px 5px 20px rgba(0,0,0,0.16); */
+    border: 2px solid #ddd;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+}
+
+.msg{
+    display: flex;
+    align-items: flex-end;
+}
+
+.message{
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.time{
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.sent{
+    flex-direction: row-reverse;
+    float: right;
+    align-items: flex-end !important;
+}
+
+.sent .message{
+    background-color: #000;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.received .message{
+    background-color: #F2F2F2;
+    color: #000;
+}
