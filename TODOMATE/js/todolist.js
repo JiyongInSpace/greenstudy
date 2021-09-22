@@ -235,7 +235,7 @@ function nextCalendar(){
 function buildCalendar(){
     let doMonth = new Date(today.getFullYear(),today.getMonth(),0);
     let lastDate = new Date(today.getFullYear(),today.getMonth()+1,0);
-    calenderHd.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월"; 
+    calenderHd.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월";
     while (calTable.rows.length > 1) {
         calTable.deleteRow(calTable.rows.length-1);
     }
@@ -258,9 +258,6 @@ function buildCalendar(){
         cell.innerHTML = `<img src ="img/check-ok.png"><font color=#e06547><br/> ${i}`;
         row = calTable.insertRow();
         }    
-        
-
-        
         if(today.getFullYear() == date.getFullYear()
             && today.getMonth() == date.getMonth()
             && i == date.getDate()) {
