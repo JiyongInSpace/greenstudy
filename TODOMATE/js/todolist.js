@@ -159,6 +159,9 @@ todoGoal.forEach(function(v,k){
         if(!hasClass){
             todoModal2.classList.add('show')
         }
+        todoModal2.addEventListener("click",function(){
+            todoModal2.classList.remove('show')
+        })
         goalDelete.addEventListener("click",function(){
             todoGoal[k].remove();
             todoModal2.classList.remove('show');
@@ -202,8 +205,7 @@ function checkList(){
 //MEMO 이벤트 실행 
 todoModal.addEventListener("click", modalClicks);
 addGoal.addEventListener("click", showGoalForm);
-goalForm.addEventListener("submit",function(e){
-    e.preventDefault();
+goalForm.addEventListener("submit",function(){
     saveGoal();
     goalForm.classList.remove('show');
     addGoal.classList.remove('active');
