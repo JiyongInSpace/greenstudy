@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="js/todolist.js" defer></script>
+
+    <link rel="stylesheet" href="css/chat_style.css">
 </head>
 <body>
 
@@ -141,5 +143,40 @@
         </div>
     </div>
 </div>
+
+<!-- chat -->
+<div id="chat_thum">
+    <img src="img/chat_img/1.png" alt="">
+</div>
+
+<div class="wrapper">
+    <div class="user-container">
+        <div class="downClose"></div>
+        <div class="nickname_con">
+            <span class="nickIcon">K</span>
+            <input type="text" id="nickname">
+            <!-- <span class="nickname">kayeong</span> -->
+        </div>
+        <div class="close"></div>
+    </div>
+
+    <div class="display-container">
+        <ul class="chatting-list">
+
+        </ul>
+    </div>
+
+    <div class="input-container">
+        <span>
+            <button class="emoji"></button>
+            <input type="text" class="chatting-input" onkeydown="javascript: if (event.keyCode == 13) {send();}" placeholder="메세지를 남겨주세요...">
+            <button class="send-button"></button>
+        </span>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/chat.js"></script>
+
 </body>
 </html>
