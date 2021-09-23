@@ -85,7 +85,7 @@
 
 .b-nav:not(.open) {
     float:right;
-    width:100px;
+    width:125px;
     visibility: hidden;
 }
 .b-nav a:not(.open) {
@@ -98,11 +98,14 @@
 }
 .b-nav.open {
     float:right;
-    width:100px;
+    width:125px;
     visibility: visible;
-
     display:fixed;
     top:0; right:0;
+    button{
+        width:220px;
+        height:40px;
+    }
 }
 .b-nav.open a {
     -webkit-animation-duration: 0.4s;
@@ -237,7 +240,7 @@ main{
                     display: inline-block;
                     color:#888;
                     text-align:center;
-                    border-radius: 50%;
+                    border-bottom:1px solid #fff;
                 }
                 th:not(:nth-child(7)),td:not(:nth-child(7)){
                     margin-right: calc((100% - 140px)/6);

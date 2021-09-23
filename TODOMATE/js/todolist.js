@@ -258,14 +258,30 @@ function buildCalendar(){
         cell.innerHTML = `<img src ="img/check-ok.png"><font color=#e06547><br/> ${i}`;
         row = calTable.insertRow();
         }    
-        
 
-        
         if(today.getFullYear() == date.getFullYear()
             && today.getMonth() == date.getMonth()
             && i == date.getDate()) {
             cell.bgColor = "yellow";   
         }
     }
+    
+    // date select
+    const dateArr = document.querySelectorAll('.cal-table tbody tr td');
+
+    // date select - click event
+    dateArr.forEach(function(v,k){
+        dateArr[k].addEventListener("click",function(){
+            console.log(
+                today.getFullYear(),
+                today.getMonth(),
+                Number(this.textContent.trim())
+            )
+            //console.log(v)
+            //console.log(k)
+            //console.log(dateArr)
+            dateArr[k].style.borderBottom = "1px solid #000";
+        })
+    })
 }
 buildCalendar()

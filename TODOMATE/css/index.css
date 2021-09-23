@@ -102,7 +102,7 @@
 
 .b-nav:not(.open) {
   float: right;
-  width: 100px;
+  width: 125px;
   visibility: hidden;
 }
 
@@ -117,11 +117,16 @@
 
 .b-nav.open {
   float: right;
-  width: 100px;
+  width: 125px;
   visibility: visible;
   display: fixed;
   top: 0;
   right: 0;
+}
+
+.b-nav.open button {
+  width: 220px;
+  height: 40px;
 }
 
 .b-nav.open a {
@@ -302,7 +307,7 @@ body main .con-1 .cal-table tbody th, body main .con-1 .cal-table tbody td {
   display: inline-block;
   color: #888;
   text-align: center;
-  border-radius: 50%;
+  border-bottom: 1px solid #fff;
 }
 
 body main .con-1 .cal-table tbody th:not(:nth-child(7)), body main .con-1 .cal-table tbody td:not(:nth-child(7)) {
