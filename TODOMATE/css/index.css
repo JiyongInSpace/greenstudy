@@ -546,6 +546,29 @@ body main .con-2 .todo-goal ul li.checked img {
   opacity: 1;
 }
 
+body main .con-2 .todo-goal ul li .edit-form {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 23px;
+  right: 0;
+  display: none;
+}
+
+body main .con-2 .todo-goal ul li .edit-form input {
+  cursor: default;
+  border: none;
+  display: block;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+body main .con-2 .todo-goal ul li .edit-form.show-form {
+  display: block;
+}
+
 body main .con-2 .todo-goal ul li .more-btn {
   position: absolute;
   right: 0px;

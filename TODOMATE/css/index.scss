@@ -376,6 +376,21 @@ main{
                 span{color: unset;}
                 img{opacity: 1;}
             }
+            .edit-form{
+                position: absolute;
+                top: 0; bottom: 0; left: 23px; right: 0;
+                input{
+                    cursor: default;
+                    border: none;
+                    display: block;
+                    margin: 0;
+                    height: 100%;
+                    width: 100%;
+                    border-bottom: 1px solid black;
+                }
+                display: none;
+                &.show-form{display: block};
+            }
         }
         .todo-goal ul li .more-btn{
             position: absolute;

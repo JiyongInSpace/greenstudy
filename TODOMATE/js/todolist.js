@@ -1,3 +1,77 @@
+//-----------------------달력--------------------------------//
+const calendarBox = document.querySelector(".calendar-box");
+const calenderHd = document.querySelector(".cal-hd");
+const calTable  = document.querySelector(".cal-table")
+
+let today = new Date();
+let date = new Date();
+
+function prevCalendar(){
+     today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+     buildCalendar();
+}
+
+function nextCalendar(){
+    today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+    buildCalendar();
+}
+
+function buildCalendar(){
+    let doMonth = new Date(today.getFullYear(),today.getMonth(),0);
+    let lastDate = new Date(today.getFullYear(),today.getMonth()+1,0);
+    calenderHd.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월";
+    while (calTable.rows.length > 1) {
+        calTable.deleteRow(calTable.rows.length-1);
+    }
+    let row = null;
+    let cnt = 0;
+    row = calTable.insertRow();
+    for(i=0; i<doMonth.getDay(); i++) {
+        cell = row.insertCell();
+        cnt = cnt + 1;
+     }
+    for(i=1; i<=lastDate.getDate(); i++) { 
+        cell = row.insertCell();
+        cell.innerHTML = `<img src ="img/check-ok.png"><br/> ${i}`;
+        cnt = cnt + 1;
+
+        if(cnt%7 == 6){
+        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#8abfe8><br/> ${i}`;
+        }
+        if(cnt%7 == 0) {
+        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#e06547><br/> ${i}`;
+        row = calTable.insertRow();
+        }    
+        if(today.getFullYear() == date.getFullYear()
+            && today.getMonth() == date.getMonth()
+            && i == date.getDate()) {
+            cell.bgColor = "yellow";   
+        }
+    }
+    
+    // date select
+    const dateArr = document.querySelectorAll('.cal-table tbody tr td');
+
+    // date select - click event
+    dateArr.forEach(function(v,k){
+        dateArr[k].addEventListener("click",function(){
+            console.log(
+                today.getFullYear(),
+                today.getMonth(),
+                Number(this.textContent.trim())
+            )
+            //console.log(v)
+            //console.log(k)
+            //console.log(dateArr)
+            dateArr[k].style.borderBottom = "1px solid #000";
+        })
+    })
+}
+buildCalendar()
+
+
+//-----------------------투두리스트--------------------------------//
+
 const todoForms = document.querySelectorAll(".todo-form");
 const todoLi = document.querySelectorAll(".todo-ul li");
 const todoAll = document.querySelector(".todo-list");
@@ -8,6 +82,7 @@ const todoModal = document.querySelector(".modal-bg");
 
 let goalArr = [];
 let todoArr = [];
+let whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${today.getDate()}`
 
 const savedGoals = localStorage.getItem("goals");
 if(savedGoals != null){
@@ -55,6 +130,7 @@ function addList(e){ //추가할때마다 todoArr 배열에 추가하고 li 생�
         return;
     }
     const todoObj = {
+        day: whatDay,
         goal: this.parentNode.children[0].id,
         text: this.children[1].value,
         id: Date.now(),
@@ -76,10 +152,21 @@ function writeList(todo){ // li 생성 함수
     img.src = "img/check-ok.png";
     img.addEventListener("click", checkList);
     const span = document.createElement('span');
+    span.id = todo.id;
     span.innerText = todo.text;
+    span.className = "todo-span";
     const div = document.createElement('div');
     div.className = "more-btn";
     div.innerHTML = `<span></span><span></span><span></span>`
+    const form = document.createElement('form');
+    form.className = "edit-form";
+    form.id = todo.id;
+    form.addEventListener("submit", editList);
+    const input = document.createElement('input');
+    input.value = todo.text;
+    input.type="text";
+    li.appendChild(form);
+    form.appendChild(input);
     li.appendChild(img);
     li.appendChild(span);
     li.appendChild(div);
@@ -92,7 +179,25 @@ function deleteList(id){
     localStorage.setItem("todos", JSON.stringify(todoArr));
     todoModal.classList.remove("show");
 }
-
+function showEditForm(id){
+    const forms = document.querySelectorAll(".edit-form");
+    todoModal.classList.remove("show");
+    forms.forEach(form => form.id === id ? form.classList.add("show-form") : form);
+    
+}
+function hideEditForm(e){
+    if(e.target.nodeName === "INPUT" || e.target.classList.contains("edit")) {return;};
+    const editform = document.querySelector(".show-form");
+    editform.classList.remove("show-form");
+}
+function editList(e){
+    e.preventDefault();
+    const lists = document.querySelectorAll(".todo-span");
+    lists.forEach(span => span.id === this.id ? span.textContent = this.children[0].value : span);
+    todoArr.forEach(todo => todo.id*1 === this.id*1 ? todo.text = this.children[0].value : todo);
+    localStorage.setItem("todos", JSON.stringify(todoArr));
+    this.classList.remove("show-form");
+}
 //MEMO add goal 
 function showGoalForm(){
     if(goalForm.classList.contains('show')) {
@@ -173,7 +278,7 @@ todoGoal.forEach(function(v,k){
 
 
 function showModal(e){
-    if(e.target.tagName === "IMG") return;
+    if(e.target.tagName === "IMG" || e.target.tagName === "INPUT") return;
     todoModal.classList.add("show");
     todoModal.dataset.id = e.currentTarget.id;
 }
@@ -183,8 +288,7 @@ function modalClicks(e){
     } else if(e.target.classList.contains("delete")){
         deleteList(this.dataset.id);
     } else if(e.target.classList.contains("edit")){
-        console.log("edit");
-        console.log(this.dataset.id);
+        showEditForm(this.dataset.id)
     }
 }
 function checkList(){
@@ -203,6 +307,7 @@ function checkList(){
 }
 
 //MEMO 이벤트 실행 
+window.addEventListener("click", hideEditForm);
 todoModal.addEventListener("click", modalClicks);
 addGoal.addEventListener("click", showGoalForm);
 goalForm.addEventListener("submit",function(){
@@ -213,74 +318,3 @@ goalForm.addEventListener("submit",function(){
 
 
 
-
-//-----------------------달력--------------------------------//
-const calendarBox = document.querySelector(".calendar-box");
-const calenderHd = document.querySelector(".cal-hd");
-const calTable  = document.querySelector(".cal-table")
-
-let today = new Date();
-let date = new Date();
-
-function prevCalendar(){
-     today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-     buildCalendar();
-}
-
-function nextCalendar(){
-    today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-    buildCalendar();
-}
-
-function buildCalendar(){
-    let doMonth = new Date(today.getFullYear(),today.getMonth(),0);
-    let lastDate = new Date(today.getFullYear(),today.getMonth()+1,0);
-    calenderHd.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월";
-    while (calTable.rows.length > 1) {
-        calTable.deleteRow(calTable.rows.length-1);
-    }
-    let row = null;
-    let cnt = 0;
-    row = calTable.insertRow();
-    for(i=0; i<doMonth.getDay(); i++) {
-        cell = row.insertCell();
-        cnt = cnt + 1;
-     }
-    for(i=1; i<=lastDate.getDate(); i++) { 
-        cell = row.insertCell();
-        cell.innerHTML = `<img src ="img/check-ok.png"><br/> ${i}`;
-        cnt = cnt + 1;
-
-        if(cnt%7 == 6){
-        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#8abfe8><br/> ${i}`;
-        }
-        if(cnt%7 == 0) {
-        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#e06547><br/> ${i}`;
-        row = calTable.insertRow();
-        }    
-        if(today.getFullYear() == date.getFullYear()
-            && today.getMonth() == date.getMonth()
-            && i == date.getDate()) {
-            cell.bgColor = "yellow";   
-        }
-    }
-    
-    // date select
-    const dateArr = document.querySelectorAll('.cal-table tbody tr td');
-
-    // date select - click event
-    dateArr.forEach(function(v,k){
-        dateArr[k].addEventListener("click",function(){
-            console.log(
-                today.getFullYear(),
-                today.getMonth(),
-                Number(this.textContent.trim())
-            )
-            //console.log(v)
-            //console.log(k)
-            //console.log(dateArr)
-            dateArr[k].style.borderBottom = "1px solid #000";
-        })
-    })
-}
-buildCalendar()
