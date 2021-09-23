@@ -188,7 +188,7 @@ function showEditForm(id){
 function hideEditForm(e){
     if(e.target.nodeName === "INPUT" || e.target.classList.contains("edit")) {return;};
     const editform = document.querySelector(".show-form");
-    editform.classList.remove("show-form");
+    editform && editform.classList.remove("show-form");
 }
 function editList(e){
     e.preventDefault();
