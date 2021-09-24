@@ -70,7 +70,7 @@
   -ms-user-select: none;
   user-select: none;
   width: 38px;
-  z-index: 12;
+  z-index: 22;
   -webkit-transform: translateX(3px);
           transform: translateX(3px);
 }
