@@ -116,6 +116,7 @@ if(savedTodos !== null){
     burgerMenu.addEventListener('click', function toggleClasses() {
             this.classList.toggle('open');
             burgerNav.classList.toggle('open');
+            burgerNav.style.zIndex='20';
     }, false);
 })();
 
