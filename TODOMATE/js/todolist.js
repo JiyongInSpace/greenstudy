@@ -213,7 +213,8 @@ function showGoalForm(){
 function saveGoal(){
     const goalObj = {
         text: goalInput.value,
-        id: Date.now()
+        id: Date.now(),
+        edit:"0"
     }
     createGoal(goalObj);
     goalArr.push(goalObj);
@@ -257,25 +258,59 @@ function createGoal(goal){
 const goalModify = document.querySelectorAll('.more-btn2');
 const hasClass = todoModal.classList.contains('show')
 const goalDelete = document.querySelector('.modal-bg.goalmodal .todo-modal-icon.delete');
+const goalEdit = document.querySelector('.modal-bg.goalmodal .todo-modal-icon.edit');
 const todoGoal = document.querySelectorAll('.todo-goal');
+const editGoal = document.querySelector('.todo-goal.modify');
 const todoModal2 = document.querySelector(".modal-bg.goalmodal");
-
-todoGoal.forEach(function(v,k){
-    goalModify[k].addEventListener("click",function(){
+////// 목표 수정 삭제 
+goalModify.forEach(function(v,k){
+    v.addEventListener("click",function(){
+        showGoalModal(); // 모달창 생성
+        deleteGoal(); // 목표삭제
+        editGoal(); // 목표수정
+    })
+    function showGoalModal(){
         if(!hasClass){
-            todoModal2.classList.add('show')
+            todoModal2.classList.add('show');
+            todoGoal[k].classList.add('edit');
         }
         todoModal2.addEventListener("click",function(){
-            todoModal2.classList.remove('show')
-        })
-        goalDelete.addEventListener("click",function(){
-            todoGoal[k].remove();
             todoModal2.classList.remove('show');
-            goalArr = goalArr.filter( (todo)=>todo.id !== parseInt(todoGoal[k].id) )
-            localStorage.setItem("goals", JSON.stringify(goalArr));
+            todoGoal[k].classList.remove('edit');
         })
-    })
+    }
+    function deleteGoal(){
+        goalDelete.addEventListener("click",function(){
+            if( todoGoal[k].classList.contains('edit') ){
+                todoGoal[k].remove();
+                todoModal2.classList.remove('show');
+                goalArr = goalArr.filter( (todo)=>todo.id !== parseInt(todoGoal[k].id) )
+                localStorage.setItem("goals", JSON.stringify(goalArr));
+            }
+        })
+    }
+    function editGoal(){
+        goalEdit.addEventListener("click",function(){
+            if( todoGoal[k].classList.contains('edit') ){
+            todoGoal[k].classList.add('modify');
+            }
+            goalForm.classList.add('show');
+            goalForm.classList.add('edit');
+            goalForm.addEventListener("submit",function(){
+                for(let idx=0; idx<todoGoal.length; idx++){
+                    if( todoGoal[idx].classList.contains('modify') ){
+                        goalArr[idx].text = goalInput.value;
+                        localStorage.setItem("goals", JSON.stringify(goalArr));
+                    }
+                    goalForm.classList.remove('edit');
+                    goalForm.classList.remove('show');
+                }
+                todoGoal[k].classList.remove('modify');
+            })
+        })
+    }
 })
+
 
 
 function showModal(e){
@@ -312,9 +347,11 @@ window.addEventListener("click", hideEditForm);
 todoModal.addEventListener("click", modalClicks);
 addGoal.addEventListener("click", showGoalForm);
 goalForm.addEventListener("submit",function(){
-    saveGoal();
-    goalForm.classList.remove('show');
-    addGoal.classList.remove('active');
+    if( !(goalForm.classList.contains('edit')) ){
+        saveGoal();
+        goalForm.classList.remove('show');
+        addGoal.classList.remove('active');
+    }
 });
 
 
