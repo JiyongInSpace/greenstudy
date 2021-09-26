@@ -314,6 +314,14 @@ body main .con-1 .cal-table tbody th:not(:nth-child(7)), body main .con-1 .cal-t
   margin-right: calc((100% - 140px)/6);
 }
 
+body main .con-1 .cal-table tbody td {
+  cursor: pointer;
+}
+
+body main .con-1 .cal-table tbody td.selected {
+  border-bottom: 1px solid #000;
+}
+
 body main .con-1 .cal-table img {
   width: 20px;
   opacity: 0.15;

@@ -2,18 +2,28 @@
 const calendarBox = document.querySelector(".calendar-box");
 const calenderHd = document.querySelector(".cal-hd");
 const calTable  = document.querySelector(".cal-table")
+let dateArr = document.querySelectorAll('.cal-table tbody tr td');
 
 let today = new Date();
 let date = new Date();
+let selectedDate;
+let prev=new Date().getDate()+1;
+console.log(new Date().getDate())
 
 function prevCalendar(){
-     today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-     buildCalendar();
+    today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    buildCalendar();
+    dateArr.forEach(function(v,k){
+        dateArr[k].classList.remove('selected');
+    })
 }
 
 function nextCalendar(){
     today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
     buildCalendar();
+    dateArr.forEach(function(v,k){
+        dateArr[k].classList.remove('selected');
+    })
 }
 
 function buildCalendar(){
@@ -29,7 +39,7 @@ function buildCalendar(){
     for(i=0; i<doMonth.getDay(); i++) {
         cell = row.insertCell();
         cnt = cnt + 1;
-     }
+    }
     for(i=1; i<=lastDate.getDate(); i++) { 
         cell = row.insertCell();
         cell.innerHTML = `<img src ="img/check-ok.png"><br/> ${i}`;
@@ -50,20 +60,17 @@ function buildCalendar(){
     }
     
     // date select
-    const dateArr = document.querySelectorAll('.cal-table tbody tr td');
-
+    dateArr = document.querySelectorAll('.cal-table tbody tr td');
+    dateArr[prev].classList.add('selected');
+    
     // date select - click event
     dateArr.forEach(function(v,k){
         dateArr[k].addEventListener("click",function(){
-            console.log(
-                today.getFullYear(),
-                today.getMonth(),
-                Number(this.textContent.trim())
-            )
-            //console.log(v)
-            //console.log(k)
-            //console.log(dateArr)
-            dateArr[k].style.borderBottom = "1px solid #000";
+            selectedDate = new Date(today.getFullYear(),today.getMonth(),Number(this.textContent.trim()))
+            dateArr[prev].classList.remove('selected');
+            this.classList.add('selected');
+            prev = k;
+            whatDay=selectedDate;
         })
     })
 }
