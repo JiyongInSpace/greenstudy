@@ -7,6 +7,7 @@ let dateArr = document.querySelectorAll('.cal-table tbody tr td');
 let today = new Date();
 let date = new Date();
 let selectedDate;
+let whatDay;
 let prev=new Date().getDate();
 console.log(`오늘: ${new Date().getDate()}일`)
 
@@ -73,12 +74,14 @@ function buildCalendar(){
             dateArr[prev].classList.remove('selected');
             this.classList.add('selected');
             prev = k;
-            whatDay=selectedDate;
-
+            whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${this.textContent.trim()*1 < 10 ? "0"+this.textContent.trim() : this.textContent.trim()}`;
+            const lists = document.querySelectorAll(".todo-li");
+            removeAllItems(lists);
+            makeTodolist();
         })
     })
 }
-buildCalendar()
+buildCalendar();
 
 
 //-----------------------투두리스트--------------------------------//
@@ -93,7 +96,7 @@ const todoModal = document.querySelector(".modal-bg");
 
 let goalArr = [];
 let todoArr = [];
-let whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${today.getDate()}`
+whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${today.getDate() < 10 ? "0"+today.getDate() : today.getDate()}`;
 
 const savedGoals = localStorage.getItem("goals");
 if(savedGoals != null){
@@ -110,13 +113,23 @@ const goals = document.querySelectorAll(".goal");
 const savedTodos = localStorage.getItem("todos"); 
 if(savedTodos !== null){
     todoArr = JSON.parse(savedTodos);
+    makeTodolist();
+    
+}
+function removeAllItems(arr){
+    arr.forEach(item => item.remove());
+}
+
+function makeTodolist(){
     todoArr.forEach(todo => {
+        if(todo.day*1 !== whatDay*1) return;
         goals.forEach(goal => {
             if(goal.id*1 === todo.goal*1){
                 goal.parentNode.children[2].appendChild(writeList(todo))
             }})
         })
 }
+
 
 //burger-menu
 // nav menu - burger menu
