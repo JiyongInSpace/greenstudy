@@ -7,8 +7,8 @@ let dateArr = document.querySelectorAll('.cal-table tbody tr td');
 let today = new Date();
 let date = new Date();
 let selectedDate;
-let prev=new Date().getDate()+1;
-console.log(new Date().getDate())
+let prev=new Date().getDate();
+console.log(`오늘: ${new Date().getDate()}일`)
 
 function prevCalendar(){
     today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
@@ -55,22 +55,26 @@ function buildCalendar(){
         if(today.getFullYear() == date.getFullYear()
             && today.getMonth() == date.getMonth()
             && i == date.getDate()) {
-            cell.bgColor = "yellow";   
+            cell.bgColor = "yellow";
+            cell.classList.add('selected');
         }
     }
     
     // date select
     dateArr = document.querySelectorAll('.cal-table tbody tr td');
-    dateArr[prev].classList.add('selected');
-    
+    dateArr = Array.prototype.slice.call(dateArr); // converts NodeList to Array
+
     // date select - click event
     dateArr.forEach(function(v,k){
+        
         dateArr[k].addEventListener("click",function(){
+            dateArr.forEach(function(val,key){ dateArr[key].className=""; })
             selectedDate = new Date(today.getFullYear(),today.getMonth(),Number(this.textContent.trim()))
             dateArr[prev].classList.remove('selected');
             this.classList.add('selected');
             prev = k;
             whatDay=selectedDate;
+
         })
     })
 }
