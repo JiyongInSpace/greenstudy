@@ -316,6 +316,15 @@ body main .con-1 .cal-table tbody th:not(:nth-child(7)), body main .con-1 .cal-t
 
 body main .con-1 .cal-table tbody td {
   cursor: pointer;
+  position: relative;
+}
+
+body main .con-1 .cal-table tbody td div {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 body main .con-1 .cal-table tbody td.selected {

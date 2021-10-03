@@ -245,7 +245,15 @@ main{
                 th:not(:nth-child(7)),td:not(:nth-child(7)){
                     margin-right: calc((100% - 140px)/6);
                 }
-                td{cursor:pointer}
+                td{
+                    cursor:pointer;
+                    position:relative;
+                    div{
+                        position:absolute;
+                        left:50%;top:10%;
+                        transform: translateX(-50%);
+                    }
+                }
                 td.selected{border-bottom:1px solid #000;}
             }
             img{

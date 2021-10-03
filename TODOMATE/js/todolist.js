@@ -1,14 +1,15 @@
+
 //-----------------------달력--------------------------------//
 const calendarBox = document.querySelector(".calendar-box");
 const calenderHd = document.querySelector(".cal-hd");
 const calTable  = document.querySelector(".cal-table")
-let dateArr = document.querySelectorAll('.cal-table tbody tr td');
+let dateArr = document.querySelectorAll('.cal-table tbody tr td img');
 
 let today = new Date();
 let date = new Date();
 let selectedDate;
 let whatDay;
-let prev=new Date().getDate();
+let prev=new Date().getDate()-1;
 console.log(`오늘: ${new Date().getDate()}일`)
 
 function prevCalendar(){
@@ -17,6 +18,7 @@ function prevCalendar(){
     dateArr.forEach(function(v,k){
         dateArr[k].classList.remove('selected');
     })
+    howManyleft()
 }
 
 function nextCalendar(){
@@ -25,6 +27,7 @@ function nextCalendar(){
     dateArr.forEach(function(v,k){
         dateArr[k].classList.remove('selected');
     })
+    howManyleft()
 }
 
 function buildCalendar(){
@@ -60,21 +63,26 @@ function buildCalendar(){
             cell.classList.add('selected');
         }
     }
+
+    dateArr = document.querySelectorAll('.cal-table tbody tr td img');
+
+    for(let i=0; i<dateArr.length; i++){
+        let someday = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${ i+1 < 10? "0"+ (i+1) : i+1 }`;
+        dateArr[i].parentElement.classList.add(`${someday}`)
+    }
     
     // date select
-    dateArr = document.querySelectorAll('.cal-table tbody tr td');
     dateArr = Array.prototype.slice.call(dateArr); // converts NodeList to Array
 
     // date select - click event
     dateArr.forEach(function(v,k){
-        
-        dateArr[k].addEventListener("click",function(){
-            dateArr.forEach(function(val,key){ dateArr[key].className=""; })
-            selectedDate = new Date(today.getFullYear(),today.getMonth(),Number(this.textContent.trim()))
-            dateArr[prev].classList.remove('selected');
+        dateArr[k].parentElement.addEventListener("click",function(){
+            dateArr.forEach(function(val,key){ dateArr[key].parentElement.className=""; })
+            selectedDate = new Date(today.getFullYear(),today.getMonth(),(k+1))
+            dateArr[prev].parentElement.classList.remove('selected');
             this.classList.add('selected');
             prev = k;
-            whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${this.textContent.trim()*1 < 10 ? "0"+this.textContent.trim() : this.textContent.trim()}`;
+            whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${ k+1 < 10? "0"+ (k+1) : k+1 }`;
             const lists = document.querySelectorAll(".todo-li");
             removeAllItems(lists);
             makeTodolist();
@@ -378,5 +386,37 @@ goalForm.addEventListener("submit",function(){
     }
 });
 
+//-----------------------------------TODO 남은갯수-----------------------------------------//
+function howManyleft(){
+    const nodeB = document.createElement('div');
+    let getList = JSON.parse(localStorage.getItem('todos')) 
+    // let leftList = [] // 남아있는 목표의 총 개수
+    let lastTodo =[] // 해당월에 남아있는 총 개수
+    const result = {};
 
+    getList.forEach(function(list,k){
+        if(list.checked)return;
+        dateArr.forEach(function(m,n){
+            if(list.day !== m.parentElement.className)return;
+            lastTodo.push(list.day)
+        })
+    })
 
+    lastTodo.forEach((x) => {   
+        result[x] = (result[x] || 0)+1; 
+    });
+
+    let haveDay = Object.keys(result)
+    let haveLeng = Object.values(result)
+    // console.log(haveDay,haveLeng)
+
+    haveDay.forEach(function(day,k){
+        dateArr.forEach(function(m,n){
+            if(day !== m.parentElement.className)return;
+            nodeB.innerHTML = haveLeng[k]
+            dateArr[n].parentElement.appendChild(nodeB)
+            console.log(dateArr[n].parentElement,haveLeng[k])
+        })
+    })
+}
+howManyleft()
