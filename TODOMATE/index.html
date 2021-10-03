@@ -49,10 +49,6 @@
 <!-- MEMO 메인 -->
 <main>
     <div class="con-1 calendar-box">
-        <!-- 투두메이트로 치자면 캘린더영역 입니다<br>
-        전체적인 유아이만 봐주세요<br>
-        텍스트 등 일단 임의로 넣었어요<br>
-        세부내용은 다 같이 의논해서 조정하는걸로 :) -->
         <figure>
             <span class="cal-hd"> yyyy년 m월</span>
             <button onclick="prevCalendar()"><</button>
@@ -79,6 +75,18 @@
             </form>
         </div>
         <div class="todo-list">
+            <div class="todo-goal" id="challenge">
+                <div class="goal">
+                    오늘의 챌린지(날짜별 갱신 아직X)
+                    <span class="list-add">+</span>
+                </div>
+                <div class="challenge-modify">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="todo-ul"></ul>
+            </div>
             <!-- <div class="todo-goal">
                 <div class="goal" id="1">목표1<span class="list-add">+</span></div>
                 form은 list-add 클릭했을때 나타나기
@@ -142,6 +150,11 @@
             <span class="material-icons">delete</span>
             <span>삭제</span>
         </div>
+    </div>
+</div>
+<div class="modal-bg challenge-modal">
+    <div class="todo-modal">
+        수정기능/모달창 닫는 기능 넣어야해요!<br>
     </div>
 </div>
 
