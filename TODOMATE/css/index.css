@@ -325,10 +325,15 @@ body main .con-1 .cal-table tbody td div {
   top: 10%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+  color: #888;
 }
 
-body main .con-1 .cal-table tbody td.selected {
-  border-bottom: 1px solid #000;
+body main .con-1 .cal-table tbody td:nth-child(6) {
+  color: #8abfe8;
+}
+
+body main .con-1 .cal-table tbody td:nth-child(7) {
+  color: #e06547;
 }
 
 body main .con-1 .cal-table img {
@@ -336,6 +341,10 @@ body main .con-1 .cal-table img {
   opacity: 0.15;
   -webkit-transform: translateY(8px);
           transform: translateY(8px);
+}
+
+body main .con-1 .cal-table img.selected {
+  opacity: 0.4;
 }
 
 body main .con-2 {

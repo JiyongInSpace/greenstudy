@@ -252,13 +252,23 @@ main{
                         position:absolute;
                         left:50%;top:10%;
                         transform: translateX(-50%);
+                        color: #888;
                     }
                 }
-                td.selected{border-bottom:1px solid #000;}
+                td:nth-child(6){
+                    color:#8abfe8
+                }
+                td:nth-child(7){
+                    color:#e06547
+                }
+                // td.selected{border-bottom:1px solid #000;}
             }
             img{
                 width:20px; opacity: 0.15;
                 transform:translateY(8px);
+            }
+            img.selected{
+                opacity: 0.4;
             }
         }
     }

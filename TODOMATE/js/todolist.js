@@ -1,4 +1,3 @@
-
 //-----------------------달력--------------------------------//
 const calendarBox = document.querySelector(".calendar-box");
 const calenderHd = document.querySelector(".cal-hd");
@@ -46,21 +45,20 @@ function buildCalendar(){
     }
     for(i=1; i<=lastDate.getDate(); i++) { 
         cell = row.insertCell();
-        cell.innerHTML = `<img src ="img/check-ok.png"><br/> ${i}`;
+        cell.innerHTML = `<img src ="img/check-ok.png">${i}`;
         cnt = cnt + 1;
 
         if(cnt%7 == 6){
-        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#8abfe8><br/> ${i}`;
+        cell.innerHTML = `<img src ="img/check-ok.png">${i}`;
         }
         if(cnt%7 == 0) {
-        cell.innerHTML = `<img src ="img/check-ok.png"><font color=#e06547><br/> ${i}`;
+        cell.innerHTML = `<img src ="img/check-ok.png">${i}`;
         row = calTable.insertRow();
-        }    
+        }
         if(today.getFullYear() == date.getFullYear()
             && today.getMonth() == date.getMonth()
             && i == date.getDate()) {
             cell.bgColor = "yellow";
-            cell.classList.add('selected');
         }
     }
 
@@ -77,10 +75,10 @@ function buildCalendar(){
     // date select - click event
     dateArr.forEach(function(v,k){
         dateArr[k].parentElement.addEventListener("click",function(){
-            dateArr.forEach(function(val,key){ dateArr[key].parentElement.className=""; })
+            dateArr.forEach(function(val,key){ dateArr[key].className=""; })
             selectedDate = new Date(today.getFullYear(),today.getMonth(),(k+1))
-            dateArr[prev].parentElement.classList.remove('selected');
-            this.classList.add('selected');
+            dateArr[prev].classList.remove('selected');
+            dateArr[k].classList.add('selected');
             prev = k;
             whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${ k+1 < 10? "0"+ (k+1) : k+1 }`;
             const lists = document.querySelectorAll(".todo-li");
@@ -90,7 +88,6 @@ function buildCalendar(){
     })
 }
 buildCalendar();
-
 
 //-----------------------투두리스트--------------------------------//
 
@@ -121,9 +118,9 @@ const goals = document.querySelectorAll(".goal");
 const savedTodos = localStorage.getItem("todos"); 
 if(savedTodos !== null){
     todoArr = JSON.parse(savedTodos);
-    makeTodolist();
-    
+    makeTodolist();    
 }
+
 function removeAllItems(arr){
     arr.forEach(item => item.remove());
 }
@@ -173,6 +170,8 @@ function addList(e){ //추가할때마다 todoArr 배열에 추가하고 li 생�
     todoArr.push(todoObj);
     this.children[1].value = "";
     localStorage.setItem("todos", JSON.stringify(todoArr));
+    howManyleft()
+
 }
 
 function writeList(todo){ // li 생성 함수
@@ -211,6 +210,7 @@ function deleteList(id){
     todoArr = todoArr.filter(todo => todo.id*1 !== id*1);
     localStorage.setItem("todos", JSON.stringify(todoArr));
     todoModal.classList.remove("show");
+    howManyleft()
 }
 function showEditForm(id){
     const forms = document.querySelectorAll(".edit-form");
@@ -300,6 +300,7 @@ goalModify.forEach(function(v,k){
         showGoalModal(); // 모달창 생성
         deleteGoal(); // 목표삭제
         editGoal(); // 목표수정
+
     })
     function showGoalModal(){
         if(!hasClass){
@@ -310,6 +311,7 @@ goalModify.forEach(function(v,k){
             todoModal2.classList.remove('show');
             todoGoal[k].classList.remove('edit');
         })
+
     }
     function deleteGoal(){
         goalDelete.addEventListener("click",function(){
@@ -339,6 +341,7 @@ goalModify.forEach(function(v,k){
                 }
                 todoGoal[k].classList.remove('modify');
             })
+            
         })
     }
 })
@@ -372,7 +375,8 @@ function checkList(){
         });
     }
     localStorage.setItem("todos", JSON.stringify(todoArr));
-}
+    howManyleft()
+}    
 
 //MEMO 이벤트 실행 
 window.addEventListener("click", hideEditForm);
@@ -390,7 +394,7 @@ goalForm.addEventListener("submit",function(){
 function howManyleft(){
     let getList = JSON.parse(localStorage.getItem('todos'))
 
-    let lastTodo =[] // 해당월에 남아있는 총 개수
+    let lastTodo =[] // 해당월에 남아있는 TODO 리스트의 총 개수
     const result = {};
 
     getList.forEach(function(list,k){
@@ -409,13 +413,21 @@ function howManyleft(){
     let haveLeng = Object.values(result)
     // console.log(haveDay,haveLeng)
 
+    dateArr.forEach(function(m,n){
+        if (m.parentElement.children[1]){
+        m.parentElement.children[1].remove()
+        }
+    })
+
     haveDay.forEach(function(day,k){
         dateArr.forEach(function(m,n){
+
             if(day !== m.parentElement.className)return;
-            
-            let nodeB = document.createElement('div');
-            nodeB.innerHTML = haveLeng[k]
-            m.parentElement.appendChild(nodeB)
+            let nodeDiv = document.createElement('div');
+
+            nodeDiv.className = "lastdiv"
+            nodeDiv.innerHTML = haveLeng[k]
+            m.parentElement.appendChild(nodeDiv)
             // console.log(m.parentElement,haveLeng[k])
         })
     })
