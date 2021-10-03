@@ -388,9 +388,8 @@ goalForm.addEventListener("submit",function(){
 
 //-----------------------------------TODO 남은갯수-----------------------------------------//
 function howManyleft(){
-    const nodeB = document.createElement('div');
-    let getList = JSON.parse(localStorage.getItem('todos')) 
-    // let leftList = [] // 남아있는 목표의 총 개수
+    let getList = JSON.parse(localStorage.getItem('todos'))
+
     let lastTodo =[] // 해당월에 남아있는 총 개수
     const result = {};
 
@@ -413,9 +412,11 @@ function howManyleft(){
     haveDay.forEach(function(day,k){
         dateArr.forEach(function(m,n){
             if(day !== m.parentElement.className)return;
+            
+            let nodeB = document.createElement('div');
             nodeB.innerHTML = haveLeng[k]
-            dateArr[n].parentElement.appendChild(nodeB)
-            console.log(dateArr[n].parentElement,haveLeng[k])
+            m.parentElement.appendChild(nodeB)
+            // console.log(m.parentElement,haveLeng[k])
         })
     })
 }
