@@ -217,7 +217,31 @@ function showEditForm(id){
     const forms = document.querySelectorAll(".edit-form");
     todoModal.classList.remove("show");
     forms.forEach(form => form.id === id ? form.classList.add("show-form") : form);
-    
+}
+function passTomorrow(id){
+    todoArr.forEach(todo => {
+        if(todo.id*1 !== id*1){
+            return;
+        }
+        else if(todo.id*1 === id*1){
+            const lazyDay = new Date(YMDFormatter(todo.day));
+            const nextDay = new Date(lazyDay.setDate(lazyDay.getDate() + 1));
+            let tomorrow = `${nextDay.getFullYear()}${nextDay.getMonth()+1 < 10 ? "0"+(nextDay.getMonth()+1) : nextDay.getMonth()+1}${nextDay.getDate() < 10 ? "0"+nextDay.getDate() : nextDay.getDate()}`
+            todo.day=tomorrow;
+        }
+    });
+    todoModal.classList.remove("show");
+    const lists = document.querySelectorAll(".todo-li");
+    lists.forEach(list => list.id === id ? list.remove() : list);
+    localStorage.setItem("todos", JSON.stringify(todoArr));
+    howManyleft()
+}
+function YMDFormatter(num){
+    let formatNum;
+    if(num.length === 8) {
+        formatNum = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+        return formatNum;
+    }
 }
 function hideEditForm(e){
     if(e.target.nodeName === "INPUT" || e.target.classList.contains("edit")) {return;};
@@ -360,6 +384,8 @@ function modalClicks(e){
         deleteList(this.dataset.id);
     } else if(e.target.classList.contains("edit")){
         showEditForm(this.dataset.id)
+    } else if(e.target.classList.contains("pass")){
+        passTomorrow(this.dataset.id);
     }
 }
 function checkList(){
