@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans KR', sans-serif;
-    cursor: pointer;
     /* font-family: 'Patua One', cursive; */
 }
 
@@ -21,7 +20,8 @@ html,body{
     box-shadow: 0px 5px 20px rgba(0,0,0,0.16);
     border-radius: 20px;
     object-fit: cover;
-    width: 100px; height: 100px;
+    width: 75px; height: 75px;
+    cursor: pointer;
 }
 
 #chat_thum > img{
@@ -63,12 +63,14 @@ html,body{
     background:url(../img/chat_img/downClose.png) no-repeat center center;
     width: 18px; height: 11px;
     flex:0.5;
+    cursor: pointer;
 }
 
 .close{
     background: url(../img/chat_img/close.png) no-repeat center center;
     width: 18px; height: 18px;
     flex:0.5;
+    cursor: pointer;
 }
 
 .nickname_con{
@@ -138,12 +140,14 @@ html,body{
     background: url(../img/chat_img/emoji.png) no-repeat center center;
     width: 20px; height: 20px;
     border:none;
+    cursor: pointer;
 }
 
 .send-button{
     border: none;
     height: 21px; width: 18px;
     background: url(../img/chat_img/send.png) no-repeat center center;
+    cursor: pointer;
 }
 
 .chatting-list li{
@@ -154,7 +158,6 @@ html,body{
     margin-top: 15px;
     border-radius: 10px;
     font-size: 20px;
-    
 }
 
 .user{
