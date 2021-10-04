@@ -81,7 +81,7 @@ function buildCalendar(){
             dateArr[k].classList.add('selected');
             prev = k;
             whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${ k+1 < 10? "0"+ (k+1) : k+1 }`;
-            const lists = document.querySelectorAll(".todo-li");
+            const lists = document.querySelectorAll(".todo-li.TODOLIST");
             removeAllItems(lists);
             makeTodolist();
         })
@@ -101,6 +101,7 @@ const todoModal = document.querySelector(".modal-bg");
 
 let goalArr = [];
 let todoArr = [];
+
 whatDay = `${today.getFullYear()}${today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : today.getMonth()+1}${today.getDate() < 10 ? "0"+today.getDate() : today.getDate()}`;
 
 const savedGoals = localStorage.getItem("goals");
@@ -177,7 +178,7 @@ function addList(e){ //추가할때마다 todoArr 배열에 추가하고 li 생�
 function writeList(todo){ // li 생성 함수
     const li = document.createElement('li');
     li.id = todo.id;
-    li.className = "todo-li";
+    li.className = "todo-li TODOLIST";
     if(todo.checked) li.classList.add("checked");
     li.addEventListener("click", showModal);
     const img = document.createElement('img');
@@ -216,7 +217,31 @@ function showEditForm(id){
     const forms = document.querySelectorAll(".edit-form");
     todoModal.classList.remove("show");
     forms.forEach(form => form.id === id ? form.classList.add("show-form") : form);
-    
+}
+function passTomorrow(id){
+    todoArr.forEach(todo => {
+        if(todo.id*1 !== id*1){
+            return;
+        }
+        else if(todo.id*1 === id*1){
+            const lazyDay = new Date(YMDFormatter(todo.day));
+            const nextDay = new Date(lazyDay.setDate(lazyDay.getDate() + 1));
+            let tomorrow = `${nextDay.getFullYear()}${nextDay.getMonth()+1 < 10 ? "0"+(nextDay.getMonth()+1) : nextDay.getMonth()+1}${nextDay.getDate() < 10 ? "0"+nextDay.getDate() : nextDay.getDate()}`
+            todo.day=tomorrow;
+        }
+    });
+    todoModal.classList.remove("show");
+    const lists = document.querySelectorAll(".todo-li");
+    lists.forEach(list => list.id === id ? list.remove() : list);
+    localStorage.setItem("todos", JSON.stringify(todoArr));
+    howManyleft()
+}
+function YMDFormatter(num){
+    let formatNum;
+    if(num.length === 8) {
+        formatNum = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+        return formatNum;
+    }
 }
 function hideEditForm(e){
     if(e.target.nodeName === "INPUT" || e.target.classList.contains("edit")) {return;};
@@ -245,8 +270,7 @@ function showGoalForm(){
 function saveGoal(){
     const goalObj = {
         text: goalInput.value,
-        id: Date.now(),
-        edit:"0"
+        id: Date.now()
     }
     createGoal(goalObj);
     goalArr.push(goalObj);
@@ -360,6 +384,8 @@ function modalClicks(e){
         deleteList(this.dataset.id);
     } else if(e.target.classList.contains("edit")){
         showEditForm(this.dataset.id)
+    } else if(e.target.classList.contains("pass")){
+        passTomorrow(this.dataset.id);
     }
 }
 function checkList(){
@@ -376,7 +402,73 @@ function checkList(){
     }
     localStorage.setItem("todos", JSON.stringify(todoArr));
     howManyleft()
-}    
+}
+
+/////////////////////////// 챌린지 시작
+//MEMO 구현완료 : 챌린지 랜덤생성, 챌린지 로컬저장, 챌린지 모달창 생성, 
+//TODO 미완료 : 챌린지 날짜별 갱신, 모달창닫기 및 챌린지 항목 수정, 챌린지 체크 
+let challArr = [];
+let challengeList = [
+    "하루에 물 1리터 마시기",
+    "식후 30분 걷기",
+    "깃 허브 커밋 1회 하기",
+    "하루 감사했던 일 하나 찾기",
+    "한 끼 잘 차려먹기",
+    "좋아하는 과일 먹기",
+    "알람 듣고 바로 일어나기",
+    "한 시간 이상 스스로 공부해보기",
+    "하루 1가지 나를 칭찬하기",
+    "책 10장 읽기"
+];
+const savedChall = localStorage.getItem("challenge");
+if(savedChall != null){
+    challArr = JSON.parse(savedChall);
+    challArr.forEach(createChallenge);
+};
+function saveChallenge(){
+    let randomList = Math.floor(Math.random() * challengeList.length);
+    let challObj = {
+        checked: false, //체크상태여부(기본 False)
+        date: whatDay,
+        text: challengeList[randomList]
+    }
+    createChallenge(challObj);
+    challArr.push(challObj);
+    localStorage.setItem("challenge", JSON.stringify(challArr));
+}
+function createChallenge(chall){
+    const li = document.createElement('li');
+    li.id = chall.date;
+    li.className = "todo-li challList";
+    const img = document.createElement('img');
+    img.src = "img/check-ok.png";
+    const span = document.createElement('span');
+    span.innerText = chall.text;
+    span.className = "todo-span";
+    li.appendChild(img);
+    li.appendChild(span);
+    const ul = document.querySelector("#challenge .todo-ul");
+    ul.appendChild(li);
+}
+const challBtn = document.querySelector("#challenge .goal")
+challBtn.addEventListener("click",function(){
+    const savedChall = document.querySelector("#challenge .todo-li");
+    if(savedChall == null){
+        saveChallenge();
+    }
+});
+const challModal = document.querySelector(".challenge-modal .todo-modal")
+for(let challIdx=0; challIdx<challengeList.length; challIdx++){
+    challModal.innerHTML += `${challIdx+1}. ${challengeList[challIdx]}<br>`;
+}
+const challModalBtn = document.querySelector(".challenge-modify");
+const challModalPop = document.querySelector(".challenge-modal");
+function challShowModal(){
+    challModalPop.classList.add("show");
+}
+challModalBtn.addEventListener("click",challShowModal);
+//////////////////////챌린지 끝
+
 
 //MEMO 이벤트 실행 
 window.addEventListener("click", hideEditForm);
