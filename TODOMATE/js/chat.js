@@ -69,32 +69,25 @@ function infoTodo(){
     //날짜 형식을 ex)(올해 년도)1001 로 변경
     var month = v.split('월');
     var day = month[1].split('일');
-
     month = month[0]
     day = day[0].trim();
-
     if(month<10){
         month = `0${month}`;
     }
     if(day<10){
         day = `0${day}`;
     }
-
     var date = `${new Date().getFullYear()}${month}${day}`;
     const local = JSON.parse(localStorage.getItem('todos'));
 
     const array = [];
-
     //일정이 여러개면 여러개 나오게 해야함
-
     for(let i=0; i<local.length; i++){
         if(local[i].day==date){
             array.push(local[i].text);
         }
     }
-
     console.log(array)
-
     if(array.length == 0){
         receivedDom =
                         `<span class="profile">
@@ -120,11 +113,9 @@ function infoTodo(){
                             </div>
                         </span>`
     }
-
     li.classList.add('received');
     li.innerHTML = receivedDom;
     chatList.appendChild(li);
-
     chatInput.value = "";
 }
 
