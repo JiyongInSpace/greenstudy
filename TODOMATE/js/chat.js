@@ -80,6 +80,9 @@ function infoTodo(){
     var date = `${new Date().getFullYear()}${month}${day}`;
     const local = JSON.parse(localStorage.getItem('todos'));
 
+    const li = document.createElement('li');
+    var receivedDom;
+
     const array = [];
     //일정이 여러개면 여러개 나오게 해야함
     for(let i=0; i<local.length; i++){
@@ -155,8 +158,6 @@ function putTodo(){
     
     const exist = JSON.parse(localStorage.getItem('todos'));
     if(exist == null) exist = [];
-
-
 
     localStorage.setItem('todos',JSON.stringify(todoObj));
     exist.push(todoObj);

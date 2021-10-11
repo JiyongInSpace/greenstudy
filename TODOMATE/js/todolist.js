@@ -467,6 +467,35 @@ function challShowModal(){
     challModalPop.classList.add("show");
 }
 challModalBtn.addEventListener("click",challShowModal);
+
+//챌린지 날짜 랜덤하게 나오기
+
+const td = document.querySelectorAll('.cal-table td');
+
+function afterDateChall(){
+    var now = new Date();
+    var end = new Date();
+
+    with(end) {
+        setDate(now.getDate()+1);
+        setHours(0);
+        setMinutes(0);
+        setSeconds(0);
+        setMilliseconds(0);
+    }
+
+    var result = end-now;
+
+    if(result == 0){
+        const savedChall = document.querySelector("#challenge .todo-li");
+        localStorage.removeItem('challenge'); 
+        savedChall.parentNode.innerHTML = ''
+    }
+}
+
+setInterval(afterDateChall,40);
+
+
 //////////////////////챌린지 끝
 
 
