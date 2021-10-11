@@ -24,7 +24,6 @@ const wrap = document.querySelector('.wrapper'),
                                         <div class="msg">
                                             <span class="message">
                                                 안녕하세요! 반가워요 <br/>
-
                                                 비서봇이 도와줘요! <br/><br/>
                                                     10월 2일 (해당일정) 넣어줘
                                                     10월 2일 일정 알려줘
@@ -79,9 +78,6 @@ function infoTodo(){
     }
     var date = `${new Date().getFullYear()}${month}${day}`;
     const local = JSON.parse(localStorage.getItem('todos'));
-
-    const li = document.createElement('li');
-    var receivedDom;
 
     const array = [];
     //일정이 여러개면 여러개 나오게 해야함
@@ -156,13 +152,10 @@ function putTodo(){
         checked: false
     };
     
-    const exist = JSON.parse(localStorage.getItem('todos'));
-    if(exist == null) exist = [];
-
-    localStorage.setItem('todos',JSON.stringify(todoObj));
-    exist.push(todoObj);
-    localStorage.setItem("todos",JSON.stringify(exist));
-
+    todoArr = JSON.parse(localStorage.getItem('todos'));
+    todoArr.push(todoObj);
+    localStorage.setItem("todos",JSON.stringify(todoArr));
+    
     receivedDom =
                 `<span class="profile">
                     <img src="img/chat_img/1.png" alt="any" class="image">
@@ -181,6 +174,10 @@ function putTodo(){
 
     chatInput.value = "";
 
+    const lists = document.querySelectorAll(".todo-li.TODOLIST");
+    removeAllItems(lists);
+    makeTodolist();
+    howManyleft();
 }
 
 sendButton.addEventListener('click',()=>{
