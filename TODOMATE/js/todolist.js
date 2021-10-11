@@ -466,6 +466,12 @@ const challModalPop = document.querySelector(".challenge-modal");
 function challShowModal(){
     challModalPop.classList.add("show");
 }
+function challShowoffModal(e){
+    if(e.target.classList.contains("show")){
+        challModalPop.classList.remove("show");
+    }
+}
+challModalPop.addEventListener("click",challShowoffModal);
 challModalBtn.addEventListener("click",challShowModal);
 
 //챌린지 날짜 랜덤하게 나오기
