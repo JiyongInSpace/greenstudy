@@ -525,25 +525,35 @@ function howManyleft(){
     let getList = JSON.parse(localStorage.getItem('todos'))
 
     let lastTodo =[] // 해당월에 남아있는 TODO 리스트의 총 개수
-    const result = {};
+    let FinishTodo = [];
 
+    const result = {};
+    const allResult = {};
     getList && getList.forEach(function(list,k){
         if(list.checked)return;
         dateArr.forEach(function(m,n){
-            if(list.day !== m.parentElement.className)return;
+            if(!m.parentElement.classList.contains(list.day))return;
             lastTodo.push(list.day)
+        })
+    })
+    getList && getList.forEach(function(list,k){
+        dateArr.forEach(function(m,n){
+            if(!m.parentElement.classList.contains(list.day))return;
+            FinishTodo.push(list.day)
         })
     })
 
     lastTodo.forEach((x) => {   
         result[x] = (result[x] || 0)+1; 
     });
+    FinishTodo.forEach((x) => {   
+        allResult[x] = (allResult[x] || 0)+1; 
+    });
 
     let haveDay = Object.keys(result)
     let haveLeng = Object.values(result)
-    // console.log(haveDay,haveLeng);
-    // console.log(result);
-
+    let allDay = Object.keys(allResult)
+    let finishedDays = allDay.filter(aday => result[aday] === undefined);
     dateArr.forEach(function(m,n){
         if (m.parentElement.children[1]){
         m.parentElement.children[1].remove()
@@ -552,14 +562,26 @@ function howManyleft(){
 
     haveDay.forEach(function(day,k){
         dateArr.forEach(function(m,n){
-
-            if(day !== m.parentElement.className)return;
+            if(!m.parentElement.classList.contains(day))return;
             let nodeDiv = document.createElement('div');
 
             nodeDiv.className = "lastdiv"
             nodeDiv.innerHTML = haveLeng[k]
             m.parentElement.appendChild(nodeDiv)
             // console.log(m.parentElement,haveLeng[k])
+        })
+    })
+    const finisheds = document.querySelectorAll(".finished-day");
+    finisheds.forEach(finishItem => finishItem.classList.remove("finished-day"));
+    finishedDays.forEach(day => {
+        dateArr.forEach(m => {
+            if(!m.parentElement.classList.contains(day)){
+                return;
+            };
+            let nodeDiv = document.createElement('div');
+            m.parentElement.classList.add("finished-day");
+            nodeDiv.innerHTML = "✔";
+            m.parentElement.appendChild(nodeDiv);
         })
     })
 }
