@@ -171,7 +171,7 @@ function addList(e){ //추가할때마다 todoArr 배열에 추가하고 li 생�
     todoArr.push(todoObj);
     this.children[1].value = "";
     localStorage.setItem("todos", JSON.stringify(todoArr));
-    howManyleft()
+    howManyleft();
 
 }
 
@@ -340,10 +340,13 @@ goalModify.forEach(function(v,k){
     function deleteGoal(){
         goalDelete.addEventListener("click",function(){
             if( todoGoal[k].classList.contains('edit') ){
-                todoGoal[k].remove();
+                todoGoal[k+1].remove();
                 todoModal2.classList.remove('show');
-                goalArr = goalArr.filter( (todo)=>todo.id !== parseInt(todoGoal[k].id) )
+                goalArr = goalArr.filter( (goal)=>goal.id !== parseInt(todoGoal[k+1].id) )
+                todoArr = todoArr.filter( (todo)=>todo.goal*1 !== todoGoal[k+1].id*1 )
                 localStorage.setItem("goals", JSON.stringify(goalArr));
+                localStorage.setItem("todos", JSON.stringify(todoArr));
+                howManyleft();
             }
         })
     }
@@ -524,7 +527,7 @@ function howManyleft(){
     let lastTodo =[] // 해당월에 남아있는 TODO 리스트의 총 개수
     const result = {};
 
-    getList.forEach(function(list,k){
+    getList && getList.forEach(function(list,k){
         if(list.checked)return;
         dateArr.forEach(function(m,n){
             if(list.day !== m.parentElement.className)return;
@@ -538,7 +541,8 @@ function howManyleft(){
 
     let haveDay = Object.keys(result)
     let haveLeng = Object.values(result)
-    // console.log(haveDay,haveLeng)
+    // console.log(haveDay,haveLeng);
+    // console.log(result);
 
     dateArr.forEach(function(m,n){
         if (m.parentElement.children[1]){

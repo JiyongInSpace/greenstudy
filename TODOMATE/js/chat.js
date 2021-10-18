@@ -25,7 +25,7 @@ const wrap = document.querySelector('.wrapper'),
                                             <span class="message">
                                                 안녕하세요! 반가워요 <br/>
                                                 비서봇이 도와줘요! <br/><br/>
-                                                    10월 2일 (해당일정) 넣어줘
+                                                    10월 2일 (해당목표) 목표에 (해당일정) 넣어줘<br />
                                                     10월 2일 일정 알려줘
                                             </span>
                                             <span class="time"></span> 
@@ -77,8 +77,8 @@ function infoTodo(){
         day = `0${day}`;
     }
     var date = `${new Date().getFullYear()}${month}${day}`;
-    const local = JSON.parse(localStorage.getItem('todos'));
-
+    let local = JSON.parse(localStorage.getItem('todos'));
+    !local && (local=[]);
     const array = [];
     //일정이 여러개면 여러개 나오게 해야함
     for(let i=0; i<local.length; i++){
@@ -107,7 +107,7 @@ function infoTodo(){
                         <span class="text">
                             <span class="user">Todomate</span>
                             <div class="msg">
-                            <span class="message">${array}이 있습니다.</span>
+                            <span class="message">${array}이(가) 있습니다.</span>
                                 <span class="time"></span> 
                             </div>
                         </span>`
@@ -124,14 +124,17 @@ function putTodo(){
     //날짜 형식을 ex)(올해 년도)1001 로 변경
     var month = v.split('월');
     var day = month[1].split('일');
+    var goalSaid = day[1].split('목표에');
 
     month = month[0]
     day = day[0].trim(); //공백 제거
+    goalSaid = goalSaid[0].trim();
 
     //일정 text 문자 추출
     var text = v.replace('넣어줘','');
         text = text.replace(`${month}월`,'');
         text = text.replace(`${day}일`,'');
+        text = text.replace(`${goalSaid} 목표에`,'');
 
         text = text.trim();
 
@@ -144,15 +147,41 @@ function putTodo(){
 
     var date = `${new Date().getFullYear()}${month}${day}`;
 
+    let goalNum;
+    let goalTextArr = goalArr.map(goal => goal.text);
+    console.log(goalTextArr);
+    if(goalTextArr.includes(goalSaid)){
+        goalArr.forEach(goal => goal.text === goalSaid ? goalNum = goal.id : goal);
+    } else {
+        receivedDom =
+                    `<span class="profile">
+                        <img src="img/chat_img/1.png" alt="any" class="image">
+                    </span>
+                    <span class="text">
+                        <span class="user">Todomate</span>
+                        <div class="msg1">
+                            <span class="message">그런 목표는 없습니다.</span>
+                            <span class="time"></span> 
+                        </div>
+                    </span>`;
+        li.classList.add('received');
+        li.innerHTML = receivedDom;
+        chatList.appendChild(li);
+    
+        chatInput.value = "";
+        return;
+    }
+
     const todoObj = {
         day: date,
-        goal: 1,
+        goal: goalNum,
         text: text,
         id: Date.now(),
         checked: false
     };
     
     todoArr = JSON.parse(localStorage.getItem('todos'));
+    !todoArr && (todoArr=[]);
     todoArr.push(todoObj);
     localStorage.setItem("todos",JSON.stringify(todoArr));
     
