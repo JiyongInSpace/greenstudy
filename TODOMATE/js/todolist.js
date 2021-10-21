@@ -489,6 +489,7 @@ function howManyleft(){
     let lastTodo =[] // 해당월에 남아있는 TODO 리스트의 총 개수
     const result = {};
 
+    //console.log(getList)
     getList.forEach(function(list,k){
         if(list.checked)return;
         dateArr.forEach(function(m,n){
