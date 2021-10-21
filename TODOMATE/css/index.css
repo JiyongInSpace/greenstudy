@@ -328,6 +328,14 @@ body main .con-1 .cal-table tbody td div {
   color: #888;
 }
 
+body main .con-1 .cal-table tbody td.finished-day img {
+  opacity: 1;
+}
+
+body main .con-1 .cal-table tbody td.finished-day div {
+  color: white;
+}
+
 body main .con-1 .cal-table tbody td:nth-child(6) {
   color: #8abfe8;
 }

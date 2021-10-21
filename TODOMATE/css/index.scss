@@ -254,6 +254,10 @@ main{
                         transform: translateX(-50%);
                         color: #888;
                     }
+                    &.finished-day{
+                        img{opacity: 1;}
+                        div{color: white;}
+                    }
                 }
                 td:nth-child(6){
                     color:#8abfe8
