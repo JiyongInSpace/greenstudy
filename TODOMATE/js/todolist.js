@@ -504,7 +504,6 @@ function afterDateChall(){
 
 setInterval(afterDateChall,40);
 
-
 //////////////////////챌린지 끝
 
 
