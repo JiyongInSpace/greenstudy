@@ -171,7 +171,7 @@ function addList(e){ //추가할때마다 todoArr 배열에 추가하고 li 생�
     todoArr.push(todoObj);
     this.children[1].value = "";
     localStorage.setItem("todos", JSON.stringify(todoArr));
-    howManyleft();
+    howManyleft()
 
 }
 
@@ -340,13 +340,10 @@ goalModify.forEach(function(v,k){
     function deleteGoal(){
         goalDelete.addEventListener("click",function(){
             if( todoGoal[k].classList.contains('edit') ){
-                todoGoal[k+1].remove();
+                todoGoal[k].remove();
                 todoModal2.classList.remove('show');
-                goalArr = goalArr.filter( (goal)=>goal.id !== parseInt(todoGoal[k+1].id) )
-                todoArr = todoArr.filter( (todo)=>todo.goal*1 !== todoGoal[k+1].id*1 )
+                goalArr = goalArr.filter( (todo)=>todo.id !== parseInt(todoGoal[k].id) )
                 localStorage.setItem("goals", JSON.stringify(goalArr));
-                localStorage.setItem("todos", JSON.stringify(todoArr));
-                howManyleft();
             }
         })
     }
@@ -469,12 +466,6 @@ const challModalPop = document.querySelector(".challenge-modal");
 function challShowModal(){
     challModalPop.classList.add("show");
 }
-function challShowoffModal(e){
-    if(e.target.classList.contains("show")){
-        challModalPop.classList.remove("show");
-    }
-}
-challModalPop.addEventListener("click",challShowoffModal);
 challModalBtn.addEventListener("click",challShowModal);
 
 //챌린지 날짜 랜덤하게 나오기
@@ -504,6 +495,7 @@ function afterDateChall(){
 
 setInterval(afterDateChall,40);
 
+
 //////////////////////챌린지 끝
 
 
@@ -524,40 +516,24 @@ function howManyleft(){
     let getList = JSON.parse(localStorage.getItem('todos'))
 
     let lastTodo =[] // 해당월에 남아있는 TODO 리스트의 총 개수
-    let FinishTodo = [];
-
-
-    //console.log(getList)
-    getList.forEach(function(list,k){
-
     const result = {};
-    const allResult = {};
-    getList && getList.forEach(function(list,k){
 
+    getList.forEach(function(list,k){
         if(list.checked)return;
         dateArr.forEach(function(m,n){
-            if(!m.parentElement.classList.contains(list.day))return;
+            if(list.day !== m.parentElement.className)return;
             lastTodo.push(list.day)
-        })
-    })
-    getList && getList.forEach(function(list,k){
-        dateArr.forEach(function(m,n){
-            if(!m.parentElement.classList.contains(list.day))return;
-            FinishTodo.push(list.day)
         })
     })
 
     lastTodo.forEach((x) => {   
         result[x] = (result[x] || 0)+1; 
     });
-    FinishTodo.forEach((x) => {   
-        allResult[x] = (allResult[x] || 0)+1; 
-    });
 
     let haveDay = Object.keys(result)
     let haveLeng = Object.values(result)
-    let allDay = Object.keys(allResult)
-    let finishedDays = allDay.filter(aday => result[aday] === undefined);
+    // console.log(haveDay,haveLeng)
+
     dateArr.forEach(function(m,n){
         if (m.parentElement.children[1]){
         m.parentElement.children[1].remove()
@@ -566,7 +542,8 @@ function howManyleft(){
 
     haveDay.forEach(function(day,k){
         dateArr.forEach(function(m,n){
-            if(!m.parentElement.classList.contains(day))return;
+
+            if(day !== m.parentElement.className)return;
             let nodeDiv = document.createElement('div');
 
             nodeDiv.className = "lastdiv"
@@ -575,18 +552,6 @@ function howManyleft(){
             // console.log(m.parentElement,haveLeng[k])
         })
     })
-    const finisheds = document.querySelectorAll(".finished-day");
-    finisheds.forEach(finishItem => finishItem.classList.remove("finished-day"));
-    finishedDays.forEach(day => {
-        dateArr.forEach(m => {
-            if(!m.parentElement.classList.contains(day)){
-                return;
-            };
-            let nodeDiv = document.createElement('div');
-            m.parentElement.classList.add("finished-day");
-            nodeDiv.innerHTML = "✔";
-            m.parentElement.appendChild(nodeDiv);
-        })
-    })
 }
+
 howManyleft()
